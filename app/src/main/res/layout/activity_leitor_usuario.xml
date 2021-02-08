@@ -17,7 +17,7 @@
         android:text="@string/texto_usuario" />
 
     <TextView
-        android:id="@+id/txtRetFunc"
+        android:id="@+id/txtRetUsu"
         style="@style/TextView"
         android:text="@string/texto_usu_matric" />
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/buttonOkFunc"
+            android:id="@+id/buttonOkUsu"
             style="@style/BotaoAvulso"
             android:layout_weight="1"
             android:layout_width="fill_parent"
@@ -42,7 +42,7 @@
             android:text="@string/texto_padrao_ok" />
 
         <Button
-            android:id="@+id/buttonCancFunc"
+            android:id="@+id/buttonCancUsu"
             style="@style/BotaoAvulso"
             android:layout_weight="1"
             android:layout_width="fill_parent"
@@ -59,7 +59,7 @@
         android:text="@string/texto_atualizar_bd" />
 
     <Button
-        android:id="@+id/buttonDigFunc"
+        android:id="@+id/buttonDigUsu"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -13,23 +13,25 @@ public class CirculacaoBean extends Entidade {
     @DatabaseField(generatedId=true)
     private Long idCirculacao;
     @DatabaseField
-    private String dthrIdaCirculacao;
+    private String dthrSaidaCirculacao;
     @DatabaseField
     private String dthrRetornoCirculacao;
     @DatabaseField
-    private Long matricUsuCirculacao;
+    private Long matricMotoristaCirculacao;
     @DatabaseField
-    private Long matricColabCirculacao;
+    private Long matricPacienteCirculacao;
     @DatabaseField
-    private Double kmIdaCirculacao;
+    private Long idEquipCirculacao;
+    @DatabaseField
+    private Double kmSaidaCirculacao;
     @DatabaseField
     private Double kmRetornoCirculacao;
     @DatabaseField
-    private Long localSaidaCirculacao;
+    private Long idLocalSaidaCirculacao;
     @DatabaseField
-    private Long destinoCirculacao;
+    private Long idLocalDestinoCirculacao;
     @DatabaseField
-    private Long ocorAtendCirculacao;
+    private Long idOcorAtendCirculacao;
     @DatabaseField
     private Long statusCirculacao; // 1 - Sem Envio; 2 - Enviado
 
@@ -44,12 +46,12 @@ public class CirculacaoBean extends Entidade {
         this.idCirculacao = idCirculacao;
     }
 
-    public String getDthrIdaCirculacao() {
-        return dthrIdaCirculacao;
+    public String getDthrSaidaCirculacao() {
+        return dthrSaidaCirculacao;
     }
 
-    public void setDthrIdaCirculacao(String dthrIdaCirculacao) {
-        this.dthrIdaCirculacao = dthrIdaCirculacao;
+    public void setDthrSaidaCirculacao(String dthrSaidaCirculacao) {
+        this.dthrSaidaCirculacao = dthrSaidaCirculacao;
     }
 
     public String getDthrRetornoCirculacao() {
@@ -60,28 +62,36 @@ public class CirculacaoBean extends Entidade {
         this.dthrRetornoCirculacao = dthrRetornoCirculacao;
     }
 
-    public Long getMatricUsuCirculacao() {
-        return matricUsuCirculacao;
+    public Long getMatricMotoristaCirculacao() {
+        return matricMotoristaCirculacao;
     }
 
-    public void setMatricUsuCirculacao(Long matricUsuCirculacao) {
-        this.matricUsuCirculacao = matricUsuCirculacao;
+    public void setMatricMotoristaCirculacao(Long matricMotoristaCirculacao) {
+        this.matricMotoristaCirculacao = matricMotoristaCirculacao;
     }
 
-    public Long getMatricColabCirculacao() {
-        return matricColabCirculacao;
+    public Long getMatricPacienteCirculacao() {
+        return matricPacienteCirculacao;
     }
 
-    public void setMatricColabCirculacao(Long matricColabCirculacao) {
-        this.matricColabCirculacao = matricColabCirculacao;
+    public void setMatricPacienteCirculacao(Long matricPacienteCirculacao) {
+        this.matricPacienteCirculacao = matricPacienteCirculacao;
     }
 
-    public Double getKmIdaCirculacao() {
-        return kmIdaCirculacao;
+    public Long getIdEquipCirculacao() {
+        return idEquipCirculacao;
     }
 
-    public void setKmIdaCirculacao(Double kmIdaCirculacao) {
-        this.kmIdaCirculacao = kmIdaCirculacao;
+    public void setIdEquipCirculacao(Long idEquipCirculacao) {
+        this.idEquipCirculacao = idEquipCirculacao;
+    }
+
+    public Double getKmSaidaCirculacao() {
+        return kmSaidaCirculacao;
+    }
+
+    public void setKmSaidaCirculacao(Double kmSaidaCirculacao) {
+        this.kmSaidaCirculacao = kmSaidaCirculacao;
     }
 
     public Double getKmRetornoCirculacao() {
@@ -92,28 +102,28 @@ public class CirculacaoBean extends Entidade {
         this.kmRetornoCirculacao = kmRetornoCirculacao;
     }
 
-    public Long getLocalSaidaCirculacao() {
-        return localSaidaCirculacao;
+    public Long getIdLocalSaidaCirculacao() {
+        return idLocalSaidaCirculacao;
     }
 
-    public void setLocalSaidaCirculacao(Long localSaidaCirculacao) {
-        this.localSaidaCirculacao = localSaidaCirculacao;
+    public void setIdLocalSaidaCirculacao(Long idLocalSaidaCirculacao) {
+        this.idLocalSaidaCirculacao = idLocalSaidaCirculacao;
     }
 
-    public Long getDestinoCirculacao() {
-        return destinoCirculacao;
+    public Long getIdLocalDestinoCirculacao() {
+        return idLocalDestinoCirculacao;
     }
 
-    public void setDestinoCirculacao(Long destinoCirculacao) {
-        this.destinoCirculacao = destinoCirculacao;
+    public void setIdLocalDestinoCirculacao(Long idLocalDestinoCirculacao) {
+        this.idLocalDestinoCirculacao = idLocalDestinoCirculacao;
     }
 
-    public Long getOcorAtendCirculacao() {
-        return ocorAtendCirculacao;
+    public Long getIdOcorAtendCirculacao() {
+        return idOcorAtendCirculacao;
     }
 
-    public void setOcorAtendCirculacao(Long ocorAtendCirculacao) {
-        this.ocorAtendCirculacao = ocorAtendCirculacao;
+    public void setIdOcorAtendCirculacao(Long idOcorAtendCirculacao) {
+        this.idOcorAtendCirculacao = idOcorAtendCirculacao;
     }
 
     public Long getStatusCirculacao() {

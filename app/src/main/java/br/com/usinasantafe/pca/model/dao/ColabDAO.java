@@ -19,6 +19,11 @@ public class ColabDAO {
     public ColabDAO() {
     }
 
+    public boolean hasElements(){
+        ColabBean colabBean = new ColabBean();
+        return colabBean.hasElements();
+    }
+
     public boolean verColab(Long matricColab){
         List colabList = colabList(matricColab);
         boolean ret = colabList.size() > 0;
@@ -56,9 +61,6 @@ public class ColabDAO {
                 Gson gson = new Gson();
                 ColabBean colabBean = gson.fromJson(objeto.toString(), ColabBean.class);
                 colabBean.insert();
-
-                CirculacaoCTR circulacaoCTR = new CirculacaoCTR();
-                circulacaoCTR.salvarPassageiro(colabBean.getMatricColab());
 
                 VerifDadosServ.getInstance().pulaTelaSemTerm();
 

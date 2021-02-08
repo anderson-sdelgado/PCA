@@ -62,8 +62,6 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         atualizarAplic();
 
-        clearBD();
-
         ArrayList<String> itens = new ArrayList<>();
 
         itens.add("INICIAR CIRCULAÇÃO");
@@ -84,7 +82,7 @@ public class MenuInicialActivity extends ActivityGeneric {
                 String text = textView.getText().toString();
 
                 if (text.equals("INICIAR CIRCULAÇÃO")) {
-                    if (pcaContext.getCirculacaoCTR().hasElementsMotorista()
+                    if (pcaContext.getCirculacaoCTR().hasElementsColab()
                             && pcaContext.getConfigCTR().hasElements()) {
 
                         pcaContext.setVerTela(1);
@@ -194,10 +192,6 @@ public class MenuInicialActivity extends ActivityGeneric {
             textViewProcesso.setTextColor(Color.RED);
             textViewProcesso.setText("Aparelho sem Equipamento");
         }
-    }
-
-    public void clearBD() {
-        pcaContext.getCirculacaoCTR().delPassageiro();
     }
 
 }

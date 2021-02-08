@@ -17,7 +17,7 @@
         android:text="@string/texto_ambulancias" />
 
     <ListView
-        android:id="@+id/listaAmbul"
+        android:id="@+id/listaViewAmbul"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

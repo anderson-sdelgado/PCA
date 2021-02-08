@@ -175,4 +175,7 @@
     <string name="texto_local_destino">LOCAL DESTINO</string>
     <string name="texto_local_saida">LOCAL SAÍDA</string>
     <string name="texto_ocor_atend">OCORRÊNCIAS DE ATENDIMENTO</string>
+    <string name="texto_informacao">INFORMAÇÕES</string>
+    <string name="texto_canc_viagem">CANCELAR VIAGEM</string>
+    <string name="texto_finalizar_viagem">FINALIZAR VIAGEM</string>
 </resources>

@@ -1,107 +1,170 @@
 package br.com.usinasantafe.pca.control;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.usinasantafe.pca.model.bean.estaticas.ColabBean;
+import br.com.usinasantafe.pca.model.bean.estaticas.EquipBean;
+import br.com.usinasantafe.pca.model.bean.estaticas.LocalBean;
+import br.com.usinasantafe.pca.model.bean.estaticas.OcorAtendBean;
 import br.com.usinasantafe.pca.model.bean.variaveis.CirculacaoBean;
+import br.com.usinasantafe.pca.model.dao.CirculacaoDAO;
+import br.com.usinasantafe.pca.model.dao.ColabDAO;
+import br.com.usinasantafe.pca.model.dao.EquipDAO;
+import br.com.usinasantafe.pca.model.dao.LocalDAO;
+import br.com.usinasantafe.pca.model.dao.OcorAtendDAO;
+import br.com.usinasantafe.pca.util.AtualDadosServ;
 
 public class CirculacaoCTR {
-
-    private CirculacaoBean circulacaoBean;
 
     public CirculacaoCTR() {
     }
 
     ///////////////////////////////// VERIFICAR DADOS ////////////////////////////////////////////
 
+    public boolean hasElementsColab(){
+        ColabDAO colabDAO = new ColabDAO();
+        return colabDAO.hasElements();
+    }
+
+    public boolean verColab(Long matricColab){
+        ColabDAO colabDAO = new ColabDAO();
+        return colabDAO.verColab(matricColab);
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////// SALVAR/ATUALIZAR/EXCLUIR DADOS /////////////////////////////////
 
+    public void criarCirculacao(Long matricUsuario){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        circulacaoDAO.criarCirculacao(matricUsuario);
+    }
+
+    public void delCircAberto(){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        circulacaoDAO.delCircAberto();
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////
 
+    /////////////////////////////////////// GET DADOS ////////////////////////////////////////////
 
+    public CirculacaoBean getCirculacaoAberta(){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        return circulacaoDAO.getCirculacaoAberta();
+    }
 
-//    public boolean hasElementsMotorista(){
-//        MotoristaDAO motoristaDAO = new MotoristaDAO();
-//        return motoristaDAO.hasElements();
-//    }
-//
-//    public boolean verMotorista(Long matricMoto){
-//        MotoristaDAO motoristaDAO = new MotoristaDAO();
-//        return motoristaDAO.verMotorista(matricMoto);
-//    }
-//
-//    public boolean verColab(Long matricColab){
-//        ColabDAO colabDAO = new ColabDAO();
-//        return colabDAO.verColab(matricColab);
-//    }
-//
-//    public boolean verMatricColabViagem(Long matricColab){
-//        PassageiroDAO passageiroDAO = new PassageiroDAO();
-//        ConfigCTR configCTR = new ConfigCTR();
-//        return passageiroDAO.verMatricColabViagem(matricColab, configCTR.getConfig().getDtrhViagemConfig());
-//    }
-//
-//    public MotoristaBean getMotorista(Long matricMoto){
-//        MotoristaDAO motoristaDAO = new MotoristaDAO();
-//        return motoristaDAO.getMotorista(matricMoto);
-//    }
-//
-//    public ColabBean getColab(Long matricColab){
-//        ColabDAO colabDAO = new ColabDAO();
-//        return colabDAO.getColab(matricColab);
-//    }
-//
-//    public List<PassageiroBean> passageiroList(){
-//        PassageiroDAO passageiroDAO = new PassageiroDAO();
-//        ConfigCTR configCTR = new ConfigCTR();
-//        return passageiroDAO.passageiroViagemList(configCTR.getConfig().getDtrhViagemConfig(), configCTR.getConfig().getMatricMotoConfig(), configCTR.getConfig().getIdTurnoConfig());
-//    }
-//
-//    public boolean verPassageiroNEnviado(){
-//        PassageiroDAO passageiroDAO = new PassageiroDAO();
-//        return passageiroDAO.verPassageiroNEnviado();
-//    }
-//
-//    public void salvarPassageiro(Long matricColab){
-//        ConfigCTR configCTR = new ConfigCTR();
-//        PassageiroDAO passageiroDAO = new PassageiroDAO();
-//        passageiroDAO.salvarPassageiro(configCTR.getConfig(), matricColab);
-//    }
-//
-//    public String dadosEnvio(){
-//        PassageiroDAO passageiroDAO = new PassageiroDAO();
-//        return passageiroDAO.dadosEnvio();
-//    }
-//
-//    public void updatePassageiro(String retorno) {
-//        PassageiroDAO passageiroDAO = new PassageiroDAO();
-//        passageiroDAO.updatePassageiro(retorno);
-//    }
-//
-//    public void delPassageiro(){
-//        PassageiroDAO passageiroDAO = new PassageiroDAO();
-//        passageiroDAO.delPassageiro();
-//    }
-//
-//    public void atualDadosMotorista(Context telaAtual, Class telaProx, ProgressDialog progressDialog){
-//        ArrayList colabArrayList = new ArrayList();
-//        colabArrayList.add("MotoristaBean");
-//        AtualDadosServ.getInstance().atualGenericoBD(telaAtual, telaProx, progressDialog, colabArrayList);
-//    }
-//
-//    public void atualDadosColab(Context telaAtual, Class telaProx, ProgressDialog progressDialog){
-//        ArrayList colabArrayList = new ArrayList();
-//        colabArrayList.add("ColabBean");
-//        AtualDadosServ.getInstance().atualGenericoBD(telaAtual, telaProx, progressDialog, colabArrayList);
-//    }
-//
-//    public void verMotorista(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
-//        MotoristaDAO motoristaDAO = new MotoristaDAO();
-//        motoristaDAO.verMotorista(dado, telaAtual, telaProx, progressDialog);
-//    }
-//
-//    public void verColab(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
-//        ColabDAO colabDAO = new ColabDAO();
-//        colabDAO.verColab(dado, telaAtual, telaProx, progressDialog);
-//    }
+    public ColabBean getColab(Long matricColab){
+        ColabDAO colabDAO = new ColabDAO();
+        return colabDAO.getColab(matricColab);
+    }
+
+    public EquipBean getEquip(Long idEquip){
+        EquipDAO equipDAO = new EquipDAO();
+        return equipDAO.getEquip(idEquip);
+    }
+
+    public LocalBean getLocal(Long idLocal){
+        LocalDAO localDAO = new LocalDAO();
+        return localDAO.getLocal(idLocal);
+    }
+
+    public OcorAtendBean getOcorAtend(Long idOcorAtend){
+        OcorAtendDAO ocorAtendDAO = new OcorAtendDAO();
+        return ocorAtendDAO.getOcorAtend(idOcorAtend);
+    }
+
+    public List<EquipBean> equipList(){
+        EquipDAO equipDAO = new EquipDAO();
+        return equipDAO.equipList();
+    }
+
+    public List<LocalBean> localSaidaList(){
+        LocalDAO localDAO = new LocalDAO();
+        return localDAO.localSaidaList();
+    }
+
+    public List<LocalBean> localDestinoList(){
+        LocalDAO localDAO = new LocalDAO();
+        return localDAO.localDestinoList();
+    }
+
+    public List<OcorAtendBean> ocorAtendList(){
+        OcorAtendDAO ocorAtendDAO = new OcorAtendDAO();
+        return ocorAtendDAO.ocorAtendList();
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////// SET DADOS ////////////////////////////////////////////
+
+    public void setMatricPacienteCirculacao(Long matricPaciente){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        circulacaoDAO.setMatricPacienteCirculacao(matricPaciente);
+    }
+
+    public void setIdEquipCirculacao(Long idEquip){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        circulacaoDAO.setIdEquipCirculacao(idEquip);
+    }
+
+    public void setIdLocalSaidaCirculacao(Long idLocalSaida){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        circulacaoDAO.setIdLocalSaidaCirculacao(idLocalSaida);
+    }
+
+    public void setIdLocalDestinoCirculacao(Long idLocalDestino){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        circulacaoDAO.setIdLocalDestinoCirculacao(idLocalDestino);
+    }
+
+    public void setIdOcorAtendCirculacao(Long idOcorAtend){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        circulacaoDAO.setIdOcorAtendCirculacao(idOcorAtend);
+    }
+
+    public void setKmSaidaCirculacao(Double kmSaida){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        circulacaoDAO.setKmSaidaCirculacao(kmSaida);
+    }
+
+    public void setKmRetornoCirculacao(Double kmRetorno){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        circulacaoDAO.setKmRetornoCirculacao(kmRetorno);
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+    //////////////////////// VERIFICAÇÃO E ATUALIZAÇÃO DE DADOS POR SERVIDOR /////////////////////
+
+    public void atualDadosColab(Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+        ArrayList colabArrayList = new ArrayList();
+        colabArrayList.add("ColabBean");
+        AtualDadosServ.getInstance().atualGenericoBD(telaAtual, telaProx, progressDialog, colabArrayList);
+    }
+
+    public void atualDadosEquip(Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+        ArrayList equipArrayList = new ArrayList();
+        equipArrayList.add("EquipBean");
+        AtualDadosServ.getInstance().atualGenericoBD(telaAtual, telaProx, progressDialog, equipArrayList);
+    }
+
+    public void atualDadosLocal(Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+        ArrayList localArrayList = new ArrayList();
+        localArrayList.add("LocalBean");
+        AtualDadosServ.getInstance().atualGenericoBD(telaAtual, telaProx, progressDialog, localArrayList);
+    }
+
+    public void atualDadosOcorAtend(Context telaAtual, Class telaProx, ProgressDialog progressDialog){
+        ArrayList ocorAtendArrayList = new ArrayList();
+        ocorAtendArrayList.add("OcorAtendBean");
+        AtualDadosServ.getInstance().atualGenericoBD(telaAtual, telaProx, progressDialog, ocorAtendArrayList);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

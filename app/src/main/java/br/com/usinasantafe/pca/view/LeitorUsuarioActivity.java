@@ -1,7 +1,5 @@
 package br.com.usinasantafe.pca.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -14,12 +12,13 @@ import android.widget.TextView;
 import br.com.usinasantafe.pca.PCAContext;
 import br.com.usinasantafe.pca.R;
 import br.com.usinasantafe.pca.model.bean.estaticas.ColabBean;
+import br.com.usinasantafe.pca.util.ConexaoWeb;
 
-public class LeitorUsuarioActivity extends AppCompatActivity {
+public class LeitorUsuarioActivity extends ActivityGeneric {
 
     public static final int REQUEST_CODE = 0;
     private PCAContext pcaContext;
-    private TextView txtRetFunc;
+    private TextView txtRetUsu;
     private ProgressDialog progressBar;
     private ColabBean colabBean;
 
@@ -30,10 +29,10 @@ public class LeitorUsuarioActivity extends AppCompatActivity {
 
         pcaContext = (PCAContext) getApplication();
 
-        txtRetFunc = (TextView) findViewById(R.id.txtRetFunc);
-        Button buttonOkFunc = (Button) findViewById(R.id.buttonOkFunc);
-        Button buttonCancFunc = (Button) findViewById(R.id.buttonCancFunc);
-        Button buttonDigFunc = (Button) findViewById(R.id.buttonDigFunc);
+        txtRetUsu = (TextView) findViewById(R.id.txtRetUsu);
+        Button buttonOkUsu = (Button) findViewById(R.id.buttonOkUsu);
+        Button buttonCancUsu = (Button) findViewById(R.id.buttonCancUsu);
+        Button buttonDigUsu = (Button) findViewById(R.id.buttonDigUsu);
         Button buttonAtualPadrao = (Button) findViewById(R.id.buttonAtualPadrao);
         Button buttonCaptMatric = (Button) findViewById(R.id.buttonCaptMatric);
 
@@ -41,18 +40,18 @@ public class LeitorUsuarioActivity extends AppCompatActivity {
         colabBean.setMatricColab(0L);
         colabBean.setNomeColab("");
 
-        txtRetFunc.setText("Por Favor, realize a leitura do Cartão do Colaborador Mecânico.");
+        txtRetUsu.setText("POR FAVOR, REALIZE A LEITURA DO CARTÃO DO COLABORADOR REQUISITANDO.");
 
-        buttonOkFunc.setOnClickListener(new View.OnClickListener() {
+        buttonOkUsu.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
                 if (colabBean.getMatricColab() > 0) {
 
-                    pcaContext.getConfigCTR().matricFuncConfig(colabBean.getMatricColab());
+                    pcaContext.getCirculacaoCTR().criarCirculacao(colabBean.getMatricColab());
 
-                    Intent it = new Intent(LeitorFuncActivity.this, MenuFuncaoActivity.class);
+                    Intent it = new Intent(LeitorUsuarioActivity.this, LeitorColabActivity.class);
                     startActivity(it);
                     finish();
                 }
@@ -60,22 +59,22 @@ public class LeitorUsuarioActivity extends AppCompatActivity {
             }
         });
 
-        buttonCancFunc.setOnClickListener(new View.OnClickListener() {
+        buttonCancUsu.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(LeitorFuncActivity.this, MenuInicialActivity.class);
+                Intent it = new Intent(LeitorUsuarioActivity.this, MenuInicialActivity.class);
                 startActivity(it);
                 finish();
             }
 
         });
 
-        buttonDigFunc.setOnClickListener(new View.OnClickListener() {
+        buttonDigUsu.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(LeitorFuncActivity.this, DigFuncActivity.class);
+                Intent it = new Intent(LeitorUsuarioActivity.this, DigUsuarioActivity.class);
                 startActivity(it);
                 finish();
             }
@@ -86,7 +85,7 @@ public class LeitorUsuarioActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(LeitorFuncActivity.this, br.com.usinasantafe.pbi.zxing.CaptureActivity.class);
+                Intent it = new Intent(LeitorUsuarioActivity.this, br.com.usinasantafe.pca.zxing.CaptureActivity.class);
                 startActivityForResult(it, REQUEST_CODE);
             }
 
@@ -96,7 +95,7 @@ public class LeitorUsuarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder(LeitorFuncActivity.this);
+                AlertDialog.Builder alerta = new AlertDialog.Builder(LeitorUsuarioActivity.this);
                 alerta.setTitle("ATENÇÃO");
                 alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
                 alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
@@ -105,19 +104,19 @@ public class LeitorUsuarioActivity extends AppCompatActivity {
 
                         ConexaoWeb conexaoWeb = new ConexaoWeb();
 
-                        if (conexaoWeb.verificaConexao(LeitorFuncActivity.this)) {
+                        if (conexaoWeb.verificaConexao(LeitorUsuarioActivity.this)) {
 
-                            progressBar = new ProgressDialog(LeitorFuncActivity.this);
+                            progressBar = new ProgressDialog(LeitorUsuarioActivity.this);
                             progressBar.setCancelable(true);
-                            progressBar.setMessage("Atualizando Colaborador...");
+                            progressBar.setMessage("ATUALIZANDO COLABORADOR...");
                             progressBar.show();
 
-                            pcaContext.getMecanicoCTR().atualDadosColab(LeitorFuncActivity.this
-                                    , LeitorFuncActivity.class, progressBar);
+                            pcaContext.getCirculacaoCTR().atualDadosColab(LeitorUsuarioActivity.this
+                                    , LeitorUsuarioActivity.class, progressBar);
 
                         } else {
 
-                            AlertDialog.Builder alerta = new AlertDialog.Builder(LeitorFuncActivity.this);
+                            AlertDialog.Builder alerta = new AlertDialog.Builder(LeitorUsuarioActivity.this);
                             alerta.setTitle("ATENÇÃO");
                             alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
                             alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -130,7 +129,6 @@ public class LeitorUsuarioActivity extends AppCompatActivity {
                             alerta.show();
 
                         }
-
 
                     }
                 });
@@ -153,15 +151,16 @@ public class LeitorUsuarioActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        super.onActivityResult(requestCode, resultCode, data);
         if (REQUEST_CODE == requestCode && RESULT_OK == resultCode) {
             String matricula = data.getStringExtra("SCAN_RESULT");
             if (matricula.length() == 8) {
                 matricula = matricula.substring(0, 7);
-                if (pcaContext.getMecanicoCTR().verMatricColab(Long.parseLong(matricula))) {
-                    colabBean = pcaContext.getMecanicoCTR().getColab(Long.parseLong(matricula));
-                    txtRetFunc.setText(matricula + "\n" + colabBean.getNomeColab());
+                if (pcaContext.getCirculacaoCTR().verColab(Long.parseLong(matricula))) {
+                    colabBean = pcaContext.getCirculacaoCTR().getColab(Long.parseLong(matricula));
+                    txtRetUsu.setText(matricula + "\n" + colabBean.getNomeColab());
                 } else {
-                    txtRetFunc.setText("Funcionário Inexistente");
+                    txtRetUsu.setText("COLABORADOR INEXISTENTE");
                 }
             }
         }
@@ -169,7 +168,7 @@ public class LeitorUsuarioActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        Intent it = new Intent(LeitorFuncActivity.this, MenuInicialActivity.class);
+        Intent it = new Intent(LeitorUsuarioActivity.this, MenuInicialActivity.class);
         startActivity(it);
         finish();
     }

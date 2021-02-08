@@ -9,32 +9,32 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".view.ListaLocalSaidaActivity">
+    tools:context=".view.ListaInformacaoActivity">
 
     <TextView
-        android:id="@+id/textViewListaLocalSaida"
+        android:id="@+id/textViewListaInfo"
         style="@style/TextViewTituloLista"
-        android:text="@string/texto_local_saida" />
+        android:text="@string/texto_informacao" />
 
     <ListView
-        android:id="@+id/listaLocalSaida"
+        android:id="@+id/listaViewInfo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         />
 
     <Button
-        android:id="@+id/buttonRetListaLocalSaida"
+        android:id="@+id/buttonFinalizarViagem"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_padrao_retornar" />
+        android:text="@string/texto_finalizar_viagem" />
 
     <Button
-        android:id="@+id/buttonAtualListaLocalSaida"
+        android:id="@+id/buttonCancViagem"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_atualizar_bd" />
+        android:text="@string/texto_canc_viagem" />
 
 </LinearLayout>

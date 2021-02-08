@@ -4,8 +4,8 @@ import br.com.usinasantafe.pca.PCAContext;
 
 public class UrlsConexaoHttp {
 
-    public static String urlPrincipal = "http://www.usinasantafe.com.br/pco/view/";
-    public static String urlPrincEnvio = "http://www.usinasantafe.com.br/pco/view/";
+    public static String urlPrincipal = "http://www.usinasantafe.com.br/pcadev/view/";
+    public static String urlPrincEnvio = "http://www.usinasantafe.com.br/pcadev/view/";
 
     public static String localPSTEstatica = "br.com.usinasantafe.pca.model.bean.estaticas.";
     public static String localUrl = "br.com.usinasantafe.pca.util.connHttp.UrlsConexaoHttp";

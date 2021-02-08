@@ -11,10 +11,8 @@ public class PCAContext extends Application {
     private CirculacaoCTR circulacaoCTR;
     private ConfigCTR configCTR;
     private int verTela;
-    // 1 - Tela Inicial
-    // 2 - Tela Passageiro
-    // 3 - Verificando Motorista
-    // 4 - Verificando Colaborador
+    // 1 - Kilometragem Inicial
+    // 2 - Kilometragem Final
 
     @Override
     public void onCreate() {

@@ -10,6 +10,7 @@ import com.j256.ormlite.table.TableUtils;
 
 import br.com.usinasantafe.pca.model.bean.estaticas.ColabBean;
 import br.com.usinasantafe.pca.model.bean.estaticas.EquipBean;
+import br.com.usinasantafe.pca.model.bean.estaticas.LocalBean;
 import br.com.usinasantafe.pca.model.bean.estaticas.TurnoBean;
 import br.com.usinasantafe.pca.model.bean.variaveis.ConfigBean;
 import br.com.usinasantafe.pca.model.bean.variaveis.CirculacaoBean;
@@ -47,7 +48,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 			TableUtils.createTable(cs, ColabBean.class);
 			TableUtils.createTable(cs, EquipBean.class);
-			TableUtils.createTable(cs, MotoristaBean.class);
+			TableUtils.createTable(cs, LocalBean.class);
 			TableUtils.createTable(cs, TurnoBean.class);
 
 			TableUtils.createTable(cs, ConfigBean.class);

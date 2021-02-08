@@ -11,15 +11,43 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.DigColabActivity"></activity>
-        <activity android:name=".view.LeitorColabActivity" />
-        <activity android:name=".view.ListaOcorAtendActivity" />
-        <activity android:name=".view.ListaLocalDestinoActivity" />
-        <activity android:name=".view.ListaLocalSaidaActivity" />
-        <activity android:name=".view.KilometragemActivity" />
-        <activity android:name=".view.ListaAmbulanciaActivity" />
-        <activity android:name=".view.ConfigActivity" />
-        <activity android:name=".view.SenhaActivity" />
+        <activity android:name=".view.ListaInformacaoActivity"></activity>
+        <activity
+            android:name=".view.DigColabActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".view.LeitorColabActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".view.ListaOcorAtendActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".view.ListaLocalDestinoActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".view.ListaLocalSaidaActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".view.KilometragemActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".view.ListaAmbulanciaActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".view.ConfigActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".view.SenhaActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".view.DigUsuarioActivity"
             android:screenOrientation="portrait"
