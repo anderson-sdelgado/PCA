@@ -12,6 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import br.com.usinasantafe.pca.model.bean.variaveis.ConfigBean;
+import br.com.usinasantafe.pca.model.dao.LogErroDAO;
 
 public class Tempo {
 
@@ -42,7 +43,7 @@ public class Tempo {
         Date dataHora = new Date();
         Date d = new Date();
         Calendar cal = Calendar.getInstance();
-        Long dt =  dataHora.getTime() - tz.getOffset(d.getTime()) + dif();
+        Long dt =  dataHora.getTime() - tz.getOffset(d.getTime()); //+ dif();
         cal.setTimeInMillis(dt);
 
         int mes = cal.get(Calendar.MONTH);
@@ -93,7 +94,7 @@ public class Tempo {
 
         Date dataHora = new Date();
         Calendar cal = Calendar.getInstance();
-        Long dt =  dataHora.getTime() + dif();
+        Long dt =  dataHora.getTime(); //+ dif();
         cal.setTimeInMillis(dt);
 
         int mes = cal.get(Calendar.MONTH);
@@ -214,7 +215,7 @@ public class Tempo {
 
         }
         catch (Exception e) {
-            Log.i("PMM", "Erro Manip = " + e);
+            LogErroDAO.getInstance().insert(e);
         }
 
         return data;
@@ -227,7 +228,7 @@ public class Tempo {
         Date dataHora = new Date();
         Date d = new Date();
         Calendar cal = Calendar.getInstance();
-        Long dt =  dataHora.getTime() - tz.getOffset(d.getTime()) + dif();
+        Long dt =  dataHora.getTime() - tz.getOffset(d.getTime()); //+ dif();
         cal.setTimeInMillis(dt);
 
         int mes = cal.get(Calendar.MONTH);
@@ -307,7 +308,7 @@ public class Tempo {
         Date dataHora = new Date();
         Date d = new Date();
         Calendar cal = Calendar.getInstance();
-        Long dt =  dataHora.getTime() - tz.getOffset(d.getTime()) + dif();
+        Long dt =  dataHora.getTime() - tz.getOffset(d.getTime()); //+ dif();
         cal.setTimeInMillis(dt);
 
         cal.add(Calendar.MONTH, -1);
@@ -398,13 +399,13 @@ public class Tempo {
 
     }
 
-    public Long dif(){
-        ConfigBean configBean = new ConfigBean();
-        List configList = configBean.all();
-        configBean = (ConfigBean) configList.get(0);
-        configList.clear();
-        return configBean.getDifDthrConfig();
-    }
+//    public Long dif(){
+//        ConfigBean configBean = new ConfigBean();
+//        List configList = configBean.all();
+//        configBean = (ConfigBean) configList.get(0);
+//        configList.clear();
+//        return configBean.getDifDthrConfig();
+//    }
 
 	public boolean isEnvioDado() {
 		return envioDado;

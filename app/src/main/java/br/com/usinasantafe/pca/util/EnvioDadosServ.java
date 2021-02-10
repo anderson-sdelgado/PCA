@@ -32,37 +32,37 @@ public class EnvioDadosServ {
 
     public void enviarDados(Context context) {
 
-        this.context = context;
-
-        ConexaoWeb conexaoWeb = new ConexaoWeb();
-        if (conexaoWeb.verificaConexao(this.context)) {
-
-            CirculacaoCTR circulacaoCTR = new CirculacaoCTR();
-            String dados = circulacaoCTR.dadosEnvio();
-
-            Log.i("PMM", "PASSAGEIRO = " + dados);
-
-            UrlsConexaoHttp urlsConexaoHttp = new UrlsConexaoHttp();
-
-            String[] url = {urlsConexaoHttp.getsInserirPassageiro()};
-            Map<String, Object> parametrosPost = new HashMap<String, Object>();
-            parametrosPost.put("dado", dados);
-
-            PostCadGenerico conHttpPostGenerico = new PostCadGenerico();
-            conHttpPostGenerico.setParametrosPost(parametrosPost);
-            conHttpPostGenerico.execute(url);
-
-        }
-        else{
-            statusEnvio = 2;
-        }
+//        this.context = context;
+//
+//        ConexaoWeb conexaoWeb = new ConexaoWeb();
+//        if (conexaoWeb.verificaConexao(this.context)) {
+//
+//            CirculacaoCTR circulacaoCTR = new CirculacaoCTR();
+//            String dados = circulacaoCTR.dadosEnvio();
+//
+//            Log.i("PMM", "PASSAGEIRO = " + dados);
+//
+//            UrlsConexaoHttp urlsConexaoHttp = new UrlsConexaoHttp();
+//
+//            String[] url = {urlsConexaoHttp.getsInserirPassageiro()};
+//            Map<String, Object> parametrosPost = new HashMap<String, Object>();
+//            parametrosPost.put("dado", dados);
+//
+//            PostCadGenerico conHttpPostGenerico = new PostCadGenerico();
+//            conHttpPostGenerico.setParametrosPost(parametrosPost);
+//            conHttpPostGenerico.execute(url);
+//
+//        }
+//        else{
+//            statusEnvio = 2;
+//        }
 
     }
 
-    public boolean verifDadosEnvio() {
-        CirculacaoCTR circulacaoCTR = new CirculacaoCTR();
-        return circulacaoCTR.verPassageiroNEnviado();
-    }
+//    public boolean verifDadosEnvio() {
+//        CirculacaoCTR circulacaoCTR = new CirculacaoCTR();
+//        return circulacaoCTR.verPassageiroNEnviado();
+//    }
 
     public int getStatusEnvio() {
         return statusEnvio;
@@ -72,8 +72,8 @@ public class EnvioDadosServ {
 
     public void recDados(String result){
         if(result.trim().startsWith("SALVOU")) {
-            CirculacaoCTR circulacaoCTR = new CirculacaoCTR();
-            circulacaoCTR.updatePassageiro(result);
+//            CirculacaoCTR circulacaoCTR = new CirculacaoCTR();
+//            circulacaoCTR.updatePassageiro(result);
         }
     }
 

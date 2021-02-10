@@ -69,6 +69,7 @@ public class ColabDAO {
             }
 
         } catch (Exception e) {
+            LogErroDAO.getInstance().insert(e);
             VerifDadosServ.getInstance().msgSemTerm("FALHA DE PESQUISA DE COLABORADOR! POR FAVOR, TENTAR NOVAMENTE COM UM SINAL MELHOR.");
         }
     }

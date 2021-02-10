@@ -15,6 +15,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import br.com.usinasantafe.pca.model.dao.LogErroDAO;
+
 /**
  * Created by anderson on 24/07/2017.
  */
@@ -127,7 +129,7 @@ public class AtualizarAplicativo extends AsyncTask<String, Integer, Boolean> {
 
             flag = true;
         } catch (Exception e) {
-            Log.e("PMM", "Update Error: " + e.getMessage());
+            LogErroDAO.getInstance().insert(e);
             flag = false;
         }
         return flag;

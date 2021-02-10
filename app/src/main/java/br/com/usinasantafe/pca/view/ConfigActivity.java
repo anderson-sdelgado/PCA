@@ -16,7 +16,7 @@ import br.com.usinasantafe.pca.util.ConexaoWeb;
 public class ConfigActivity extends ActivityGeneric {
 
     private ProgressDialog progressBar;
-    private EditText editTextEquipConfig;
+    private EditText editTextAparelhoConfig;
     private EditText editTextSenhaConfig;
     private PCAContext pcaContext;
 
@@ -25,27 +25,27 @@ public class ConfigActivity extends ActivityGeneric {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
 
-        Button btOkConfig =  (Button) findViewById(R.id.buttonSalvarConfig );
-        Button btCancConfig = (Button) findViewById(R.id.buttonCancConfig);
-        Button btAtualBDConfig = (Button) findViewById(R.id.buttonAtualizarBD);
-        editTextEquipConfig = (EditText)  findViewById(R.id.editTextEquipConfig);
+        Button buttonSalvarConfig =  (Button) findViewById(R.id.buttonSalvarConfig );
+        Button buttonCancConfig = (Button) findViewById(R.id.buttonCancConfig);
+        Button buttonAtualizarConfig = (Button) findViewById(R.id.buttonAtualizarBD);
+        editTextAparelhoConfig = (EditText)  findViewById(R.id.editTextAparelhoConfig);
         editTextSenhaConfig = (EditText)  findViewById(R.id.editTextSenhaConfig);
 
         pcaContext = (PCAContext) getApplication();
 
         if (pcaContext.getConfigCTR().hasElements()) {
-            editTextEquipConfig.setText(String.valueOf(pcaContext.getConfigCTR().getConfig().getNroAparelhoConfig()));
+            editTextAparelhoConfig.setText(String.valueOf(pcaContext.getConfigCTR().getConfig().getNroAparelhoConfig()));
             editTextSenhaConfig.setText(pcaContext.getConfigCTR().getConfig().getSenhaConfig());
         }
 
-        btOkConfig.setOnClickListener(new View.OnClickListener() {
+        buttonSalvarConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(!editTextEquipConfig.getText().toString().equals("") &&
+                if(!editTextAparelhoConfig.getText().toString().equals("") &&
                         !editTextSenhaConfig.getText().toString().equals("")){
 
-                    pcaContext.getConfigCTR().salvarConfig(Long.parseLong(editTextEquipConfig.getText().toString()), editTextSenhaConfig.getText().toString());
+                    pcaContext.getConfigCTR().salvarConfig(Long.parseLong(editTextAparelhoConfig.getText().toString()), editTextSenhaConfig.getText().toString());
 
                     Intent it = new Intent(ConfigActivity.this, MenuInicialActivity.class);
                     startActivity(it);
@@ -56,7 +56,7 @@ public class ConfigActivity extends ActivityGeneric {
             }
         });
 
-        btCancConfig.setOnClickListener(new View.OnClickListener() {
+        buttonCancConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -67,7 +67,7 @@ public class ConfigActivity extends ActivityGeneric {
             }
         });
 
-        btAtualBDConfig.setOnClickListener(new View.OnClickListener() {
+        buttonAtualizarConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

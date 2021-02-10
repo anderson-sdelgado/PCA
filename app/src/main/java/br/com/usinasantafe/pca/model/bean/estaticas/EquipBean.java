@@ -15,11 +15,7 @@ public class EquipBean extends Entidade {
     @DatabaseField
     private Long nroEquip;
     @DatabaseField
-    private Long codClasseEquip;
-    @DatabaseField
     private String descrClasseEquip;
-    @DatabaseField
-    private Long codTurno;
 
     public EquipBean() {
     }
@@ -40,14 +36,6 @@ public class EquipBean extends Entidade {
         this.nroEquip = nroEquip;
     }
 
-    public Long getCodClasseEquip() {
-        return codClasseEquip;
-    }
-
-    public void setCodClasseEquip(Long codClasseEquip) {
-        this.codClasseEquip = codClasseEquip;
-    }
-
     public String getDescrClasseEquip() {
         return descrClasseEquip;
     }
@@ -56,11 +44,4 @@ public class EquipBean extends Entidade {
         this.descrClasseEquip = descrClasseEquip;
     }
 
-    public Long getCodTurno() {
-        return codTurno;
-    }
-
-    public void setCodTurno(Long codTurno) {
-        this.codTurno = codTurno;
-    }
 }

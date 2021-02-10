@@ -5,6 +5,8 @@ import com.j256.ormlite.stmt.DeleteBuilder;
 
 import java.sql.SQLException;
 
+import br.com.usinasantafe.pca.model.dao.LogErroDAO;
+
 public class GenericRecordable<T> {
 
 	private Dao dao;
@@ -20,7 +22,7 @@ public class GenericRecordable<T> {
 			dao = instance.getDao(classe);
 			dao.create(element);
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			LogErroDAO.getInstance().insert(e);
 		}
 	}
 	
@@ -31,7 +33,7 @@ public class GenericRecordable<T> {
 			DeleteBuilder<String, Object> deleteBuilder = dao.deleteBuilder();
 			deleteBuilder.delete();
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			LogErroDAO.getInstance().insert(e);
 		}
 	}
 	

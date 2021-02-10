@@ -20,6 +20,8 @@ import br.com.usinasantafe.pca.util.AtualDadosServ;
 
 public class CirculacaoCTR {
 
+    private CirculacaoDAO circulacaoDAO;
+
     public CirculacaoCTR() {
     }
 
@@ -40,8 +42,9 @@ public class CirculacaoCTR {
     ///////////////////////////// SALVAR/ATUALIZAR/EXCLUIR DADOS /////////////////////////////////
 
     public void criarCirculacao(Long matricUsuario){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
-        circulacaoDAO.criarCirculacao(matricUsuario);
+        circulacaoDAO = new CirculacaoDAO();
+        ConfigCTR configCTR = new ConfigCTR();
+        circulacaoDAO.criarCirculacao(matricUsuario, configCTR.getConfig().getNroAparelhoConfig());
     }
 
     public void delCircAberto(){
@@ -103,32 +106,26 @@ public class CirculacaoCTR {
     /////////////////////////////////////// SET DADOS ////////////////////////////////////////////
 
     public void setMatricPacienteCirculacao(Long matricPaciente){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
         circulacaoDAO.setMatricPacienteCirculacao(matricPaciente);
     }
 
     public void setIdEquipCirculacao(Long idEquip){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
         circulacaoDAO.setIdEquipCirculacao(idEquip);
     }
 
     public void setIdLocalSaidaCirculacao(Long idLocalSaida){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
         circulacaoDAO.setIdLocalSaidaCirculacao(idLocalSaida);
     }
 
     public void setIdLocalDestinoCirculacao(Long idLocalDestino){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
         circulacaoDAO.setIdLocalDestinoCirculacao(idLocalDestino);
     }
 
     public void setIdOcorAtendCirculacao(Long idOcorAtend){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
         circulacaoDAO.setIdOcorAtendCirculacao(idOcorAtend);
     }
 
     public void setKmSaidaCirculacao(Double kmSaida){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
         circulacaoDAO.setKmSaidaCirculacao(kmSaida);
     }
 

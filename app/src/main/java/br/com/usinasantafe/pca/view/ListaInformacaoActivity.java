@@ -9,12 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import br.com.usinasantafe.pca.PCAContext;
 import br.com.usinasantafe.pca.R;
 import br.com.usinasantafe.pca.model.bean.variaveis.CirculacaoBean;
+import br.com.usinasantafe.pca.util.Tempo;
 
 public class ListaInformacaoActivity extends ActivityGeneric {
 
@@ -33,16 +35,20 @@ public class ListaInformacaoActivity extends ActivityGeneric {
 
         ArrayList<String> itens = new ArrayList<String>();
 
-        itens.add("DATA/HORA SAÍDA:\n" + circulacaoBean.getDthrSaidaCirculacao());
+        itens.add("DATA/HORA SAÍDA:\n" + Tempo.getInstance().dataComHoraCTZ(circulacaoBean.getDthrSaidaCirculacao()));
         itens.add("MOTORISTA:\n" + circulacaoBean.getMatricMotoristaCirculacao() + " - "
                 + pcaContext.getCirculacaoCTR().getColab(circulacaoBean.getMatricMotoristaCirculacao()).getNomeColab());
         itens.add("PACIENTE:\n" + circulacaoBean.getMatricPacienteCirculacao() + " - "
                 + pcaContext.getCirculacaoCTR().getColab(circulacaoBean.getMatricPacienteCirculacao()).getNomeColab());
         itens.add("EQUIPAMENTO: " + pcaContext.getCirculacaoCTR().getEquip(circulacaoBean.getIdEquipCirculacao()).getNroEquip());
         itens.add("KM SAÍDA: " + circulacaoBean.getKmSaidaCirculacao());
-        itens.add("LOCAL SAÍDA: " + pcaContext.getCirculacaoCTR().getLocal(circulacaoBean.getIdLocalSaidaCirculacao()));
-        itens.add("LOCAL DESTINO: " + pcaContext.getCirculacaoCTR().getLocal(circulacaoBean.getIdLocalDestinoCirculacao()));
+        itens.add("LOCAL SAÍDA: " + pcaContext.getCirculacaoCTR().getLocal(circulacaoBean.getIdLocalSaidaCirculacao()).getDescrLocal());
+        itens.add("LOCAL DESTINO: " + pcaContext.getCirculacaoCTR().getLocal(circulacaoBean.getIdLocalDestinoCirculacao()).getDescrLocal());
         itens.add("OCORRÊNCIA ATENDIMENTO:\n" + pcaContext.getCirculacaoCTR().getOcorAtend(circulacaoBean.getIdOcorAtendCirculacao()).getDescrOcorAtend());
+
+        AdapterList adapterList = new AdapterList(this, itens);
+        ListView inforListView = (ListView) findViewById(R.id.listaViewInfo);
+        inforListView.setAdapter(adapterList);
 
         buttonFinalizarViagem.setOnClickListener(new View.OnClickListener() {
 

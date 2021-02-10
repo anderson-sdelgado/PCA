@@ -24,10 +24,10 @@ public class ActivityGeneric extends OrmLiteBaseActivity<DatabaseHelper> {
     protected void onResume() {
         super.onResume();
 
-//        if ((EditText) findViewById(R.id.editTextPadrao) != null) {
-//            editTextPadrao = (EditText) findViewById(R.id.editTextPadrao);
-//                editTextPadrao.setText("");
-//        }
+        if ((EditText) findViewById(R.id.editTextPadrao) != null) {
+            editTextPadrao = (EditText) findViewById(R.id.editTextPadrao);
+                editTextPadrao.setText("");
+        }
 
         if((Button) findViewById(R.id.buttonNum0) != null){
             Button buttonNum0 = (Button) findViewById(R.id.buttonNum0);

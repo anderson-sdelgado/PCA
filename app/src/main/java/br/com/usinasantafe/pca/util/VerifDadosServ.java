@@ -17,8 +17,6 @@ import java.util.Map;
 
 import br.com.usinasantafe.pca.control.ConfigCTR;
 import br.com.usinasantafe.pca.model.bean.AtualAplicBean;
-import br.com.usinasantafe.pca.model.dao.ColabDAO;
-import br.com.usinasantafe.pca.model.dao.EquipDAO;
 import br.com.usinasantafe.pca.model.pst.GenericRecordable;
 import br.com.usinasantafe.pca.util.connHttp.PostVerGenerico;
 import br.com.usinasantafe.pca.util.connHttp.UrlsConexaoHttp;
@@ -64,20 +62,8 @@ public class VerifDadosServ {
                     atualizarAplicativo.setContext(this.menuInicialActivity);
                     atualizarAplicativo.execute();
                 } else {
-//                    this.menuInicialActivity.startTimer(verAtual);
+                    this.menuInicialActivity.startTimer(verAtual);
                 }
-            }
-            else if (this.tipo.equals("Equip")) {
-                EquipDAO equipDAO = new EquipDAO();
-                equipDAO.recDadosEquip(result);
-            }
-            else if (this.tipo.equals("Moto")) {
-                MotoristaDAO motoristaDAO = new MotoristaDAO();
-                motoristaDAO.recDadosMotorista(result);
-            }
-            else if (this.tipo.equals("Colab")) {
-                ColabDAO colabDAO = new ColabDAO();
-                colabDAO.recDadosColab(result);
             }
         }
 
@@ -133,7 +119,7 @@ public class VerifDadosServ {
 
         AtualAplicBean atualAplicBean = new AtualAplicBean();
         ConfigCTR configCTR = new ConfigCTR();
-        atualAplicBean.setNroEquipAtual(configCTR.getEquip().getNroEquip());
+        atualAplicBean.setNroAparelhoAtual(configCTR.getConfig().getNroAparelhoConfig());
         atualAplicBean.setVersaoAtual(versaoAplic);
 
         urlsConexaoHttp = new UrlsConexaoHttp();

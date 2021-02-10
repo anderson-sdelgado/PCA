@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 
+import br.com.usinasantafe.pca.model.dao.LogErroDAO;
 import br.com.usinasantafe.pca.util.EnvioDadosServ;
 import br.com.usinasantafe.pca.util.Tempo;
 
@@ -67,13 +68,13 @@ public class PostCadGenerico extends AsyncTask<String, Void, String> {
 			connection.disconnect();
 			
 		} catch (Exception e) {
-			Log.i("PMM", "Erro = " + e);
+			LogErroDAO.getInstance().insert(e);
 			Tempo.getInstance().setEnvioDado(true);
 			if(bufferedReader != null){
 				try {
 					bufferedReader.close();
 				} catch (Exception er) {
-					Log.i("PMM", "Erro = " + er);
+					LogErroDAO.getInstance().insert(er);
 					EnvioDadosServ.getInstance().setPosEnvio(2);
 				}
 				EnvioDadosServ.getInstance().setPosEnvio(2);
@@ -85,7 +86,7 @@ public class PostCadGenerico extends AsyncTask<String, Void, String> {
 				try {
 					bufferedReader.close();
 				} catch (Exception e) {
-					Log.i("PMM", "Erro = " + e);
+					LogErroDAO.getInstance().insert(e);
 					EnvioDadosServ.getInstance().setPosEnvio(2);
 				}
 				
@@ -102,7 +103,7 @@ public class PostCadGenerico extends AsyncTask<String, Void, String> {
 			Log.i("PCO", "VALOR RECEBIDO --> " + result);
 			EnvioDadosServ.getInstance().recDados(result);
 		} catch (Exception e) {
-			Log.i("PCO", "FALHA RECEBIMENTO = " + e);
+			LogErroDAO.getInstance().insert(e);
 			EnvioDadosServ.getInstance().setPosEnvio(2);
 		}
 		

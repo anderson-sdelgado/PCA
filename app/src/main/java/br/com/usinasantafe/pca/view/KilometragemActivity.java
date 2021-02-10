@@ -44,6 +44,7 @@ public class KilometragemActivity extends ActivityGeneric {
                     if (pcaContext.getVerTela() == 1) {
 
                         pcaContext.getCirculacaoCTR().setKmSaidaCirculacao(kilometragemNum);
+
                         Intent it = new Intent(KilometragemActivity.this, ListaInformacaoActivity.class);
                         startActivity(it);
                         finish();

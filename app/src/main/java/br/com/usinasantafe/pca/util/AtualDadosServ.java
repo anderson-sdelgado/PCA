@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
+import br.com.usinasantafe.pca.model.dao.LogErroDAO;
 import br.com.usinasantafe.pca.model.pst.GenericRecordable;
 import br.com.usinasantafe.pca.util.connHttp.GetBDGenerico;
 import br.com.usinasantafe.pca.util.connHttp.UrlsConexaoHttp;
@@ -76,7 +77,7 @@ public class AtualDadosServ {
 
 			}
 			catch (Exception e) {
-			Log.i("PCO", "Erro Manip = " + e);
+				LogErroDAO.getInstance().insert(e);
 			}
 
 		}
@@ -117,7 +118,7 @@ public class AtualDadosServ {
 			getBDGenerico.execute(url);
 
 		} catch (Exception e) {
-			Log.i("PMM", "ERRO = " + e);
+			LogErroDAO.getInstance().insert(e);
 		}
 
 	}
@@ -150,7 +151,7 @@ public class AtualDadosServ {
 	        getBDGenerico.execute(url);
 	        
 		} catch (Exception e) {
-			Log.i("PMM", "ERRO Manip2 = " + e);
+			LogErroDAO.getInstance().insert(e);
 		}
         
 	}
@@ -182,7 +183,7 @@ public class AtualDadosServ {
 			getBDGenerico.execute(url);
 
 		} catch (Exception e) {
-			Log.i("PCO", "Erro Manip2 = " + e);
+			LogErroDAO.getInstance().insert(e);
 		}
 
 	}
@@ -290,7 +291,7 @@ public class AtualDadosServ {
 			getBDGenerico.execute(url);
 
 		} catch (Exception e) {
-			Log.i("PCO", "Erro Manip2 = " + e);
+			LogErroDAO.getInstance().insert(e);
 		}
 
 	}
@@ -324,7 +325,7 @@ public class AtualDadosServ {
 			getBDGenerico.execute(url);
 
 		} catch (Exception e) {
-			Log.i("PCO", " Manip2 = " + e);
+			LogErroDAO.getInstance().insert(e);
 		}
 
 	}
@@ -372,7 +373,7 @@ public class AtualDadosServ {
 			getBDGenerico.execute(url);
 
 		} catch (Exception e) {
-			Log.i("PCO", "Erro Manip2 = " + e);
+			LogErroDAO.getInstance().insert(e);
 		}
 
 	}

@@ -11,9 +11,10 @@ import com.j256.ormlite.table.TableUtils;
 import br.com.usinasantafe.pca.model.bean.estaticas.ColabBean;
 import br.com.usinasantafe.pca.model.bean.estaticas.EquipBean;
 import br.com.usinasantafe.pca.model.bean.estaticas.LocalBean;
-import br.com.usinasantafe.pca.model.bean.estaticas.TurnoBean;
+import br.com.usinasantafe.pca.model.bean.estaticas.OcorAtendBean;
 import br.com.usinasantafe.pca.model.bean.variaveis.ConfigBean;
 import br.com.usinasantafe.pca.model.bean.variaveis.CirculacaoBean;
+import br.com.usinasantafe.pca.model.dao.LogErroDAO;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
@@ -49,16 +50,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(cs, ColabBean.class);
 			TableUtils.createTable(cs, EquipBean.class);
 			TableUtils.createTable(cs, LocalBean.class);
-			TableUtils.createTable(cs, TurnoBean.class);
+			TableUtils.createTable(cs, OcorAtendBean.class);
 
 			TableUtils.createTable(cs, ConfigBean.class);
 			TableUtils.createTable(cs, CirculacaoBean.class);
 
 		}
 		catch(Exception e){
-			Log.e(DatabaseHelper.class.getName(),
-					"Erro criando banco de dados...",
-					e);
+			LogErroDAO.getInstance().insert(e);
 		}
 		
 	}
@@ -78,7 +77,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			
 			
 		} catch (Exception e) {
-			Log.e(DatabaseHelper.class.getName(), "Erro atualizando banco de dados...", e);
+			LogErroDAO.getInstance().insert(e);
 		}
 		
 	}

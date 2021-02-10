@@ -13,6 +13,8 @@ public class CirculacaoBean extends Entidade {
     @DatabaseField(generatedId=true)
     private Long idCirculacao;
     @DatabaseField
+    private Long nroAparelhoCirculacao;
+    @DatabaseField
     private String dthrSaidaCirculacao;
     @DatabaseField
     private String dthrRetornoCirculacao;
@@ -44,6 +46,14 @@ public class CirculacaoBean extends Entidade {
 
     public void setIdCirculacao(Long idCirculacao) {
         this.idCirculacao = idCirculacao;
+    }
+
+    public Long getNroAparelhoCirculacao() {
+        return nroAparelhoCirculacao;
+    }
+
+    public void setNroAparelhoCirculacao(Long nroAparelhoCirculacao) {
+        this.nroAparelhoCirculacao = nroAparelhoCirculacao;
     }
 
     public String getDthrSaidaCirculacao() {

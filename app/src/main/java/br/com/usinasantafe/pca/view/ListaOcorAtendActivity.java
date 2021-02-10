@@ -32,8 +32,8 @@ public class ListaOcorAtendActivity extends ActivityGeneric {
         setContentView(R.layout.activity_lista_ocor_atend);
 
         pcaContext = (PCAContext) getApplication();
-        Button buttonRetListaLocalDest = (Button) findViewById(R.id.buttonRetListaLocalDest);
-        Button buttonAtualListaLocalDest = (Button) findViewById(R.id.buttonAtualListaLocalDest);
+        Button buttonRetListaOcorAtend = (Button) findViewById(R.id.buttonRetListaOcorAtend);
+        Button buttonAtualListaOcorAtend = (Button) findViewById(R.id.buttonAtualListaOcorAtend);
 
         ArrayList<String> itens = new ArrayList<String>();
 
@@ -66,7 +66,7 @@ public class ListaOcorAtendActivity extends ActivityGeneric {
 
         });
 
-        buttonRetListaLocalDest.setOnClickListener(new View.OnClickListener() {
+        buttonRetListaOcorAtend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(ListaOcorAtendActivity.this, ListaLocalDestinoActivity.class);
@@ -75,7 +75,7 @@ public class ListaOcorAtendActivity extends ActivityGeneric {
             }
         });
 
-        buttonAtualListaLocalDest.setOnClickListener(new View.OnClickListener() {
+        buttonAtualListaOcorAtend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

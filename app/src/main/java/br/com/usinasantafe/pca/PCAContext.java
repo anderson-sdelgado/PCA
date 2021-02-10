@@ -4,10 +4,13 @@ import android.app.Application;
 
 import br.com.usinasantafe.pca.control.ConfigCTR;
 import br.com.usinasantafe.pca.control.CirculacaoCTR;
+import br.com.usinasantafe.pca.model.dao.LogErroDAO;
 
 public class PCAContext extends Application {
 
-    public static String versaoAplic = "1.02";
+    private Thread.UncaughtExceptionHandler mDefaultExceptionHandler;
+
+    public static String versaoAplic = "1.00";
     private CirculacaoCTR circulacaoCTR;
     private ConfigCTR configCTR;
     private int verTela;
@@ -38,4 +41,12 @@ public class PCAContext extends Application {
     public void setVerTela(int verTela) {
         this.verTela = verTela;
     }
+
+    private Thread.UncaughtExceptionHandler handler = new Thread.UncaughtExceptionHandler() {
+        public void uncaughtException(Thread thread, Throwable ex) {
+            LogErroDAO.getInstance().insert(ex);
+            mDefaultExceptionHandler.uncaughtException(thread, ex);
+        }
+    };
+
 }

@@ -13,8 +13,9 @@ public class UrlsConexaoHttp {
     public static String put = "?versao=" + PCAContext.versaoAplic.replace(".", "_");
 
     public static String ColabBean = urlPrincipal + "colab.php" + put;
-    public static String MotoristaBean = urlPrincipal + "moto.php" + put;
-    public static String TurnoBean = urlPrincipal + "turno.php" + put;
+    public static String EquipBean = urlPrincipal + "equip.php" + put;
+    public static String LocalBean = urlPrincipal + "local.php" + put;
+    public static String OcorAtendBean = urlPrincipal + "ocoratend.php" + put;
 
     public UrlsConexaoHttp() {
     }
