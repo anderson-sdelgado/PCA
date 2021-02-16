@@ -2,12 +2,12 @@ package br.com.usinasantafe.pca.model.pst;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import br.com.usinasantafe.pca.model.bean.variaveis.LogErroBean;
 import br.com.usinasantafe.pca.model.bean.estaticas.ColabBean;
 import br.com.usinasantafe.pca.model.bean.estaticas.EquipBean;
 import br.com.usinasantafe.pca.model.bean.estaticas.LocalBean;
@@ -18,7 +18,7 @@ import br.com.usinasantafe.pca.model.dao.LogErroDAO;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
-	public static final String FORCA_DB_NAME = "pco_db";
+	public static final String FORCA_DB_NAME = "pca_db";
 	public static final int FORCA_BD_VERSION = 1;
 
 	private static DatabaseHelper instance;
@@ -54,6 +54,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 			TableUtils.createTable(cs, ConfigBean.class);
 			TableUtils.createTable(cs, CirculacaoBean.class);
+			TableUtils.createTable(cs, LogErroBean.class);
 
 		}
 		catch(Exception e){

@@ -1,4 +1,4 @@
-package br.com.usinasantafe.pca.model.bean;
+package br.com.usinasantafe.pca.model.bean.variaveis;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;

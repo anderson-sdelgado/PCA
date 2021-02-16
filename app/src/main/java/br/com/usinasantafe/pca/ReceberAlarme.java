@@ -5,6 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.j256.ormlite.field.DatabaseField;
+
+import java.util.List;
+
+import br.com.usinasantafe.pca.model.bean.variaveis.CirculacaoBean;
 import br.com.usinasantafe.pca.model.pst.DatabaseHelper;
 import br.com.usinasantafe.pca.util.EnvioDadosServ;
 import br.com.usinasantafe.pca.util.Tempo;
@@ -20,13 +25,36 @@ public class ReceberAlarme extends BroadcastReceiver {
 
 		Log.i("PCO", "DATA HORA = " + Tempo.getInstance().dataComHora());
 
-//		if (EnvioDadosServ.getInstance().verifDadosEnvio()) {
-//			EnvioDadosServ.getInstance().setStatusEnvio(1);
-//			EnvioDadosServ.getInstance().enviarDados(context);
-//		}
-//		else{
-//			EnvioDadosServ.getInstance().setStatusEnvio(3);
-//		}
+		if (EnvioDadosServ.getInstance().verifDadosEnvio()) {
+			Log.i("PMM", "ENVIANDO");
+			EnvioDadosServ.getInstance().envioDados(context);
+		}
+
+		dados();
+
+	}
+
+	public void dados(){
+
+		CirculacaoBean circulacaoBean = new CirculacaoBean();
+		List<CirculacaoBean> circulacaoList = circulacaoBean.all();
+
+		for(CirculacaoBean circulacaoBeanBD : circulacaoList){
+			Log.i("PCA", "CIRCULACAO");
+			Log.i("PCA", "idCirculacao = " + circulacaoBeanBD.getIdCirculacao());
+			Log.i("PCA", "nroAparelhoCirculacao = " + circulacaoBeanBD.getNroAparelhoCirculacao());
+			Log.i("PCA", "dthrSaidaCirculacao = " + circulacaoBeanBD.getDthrSaidaCirculacao());
+			Log.i("PCA", "dthrRetornoCirculacao = " + circulacaoBeanBD.getDthrRetornoCirculacao());
+			Log.i("PCA", "matricMotoristaCirculacao = " + circulacaoBeanBD.getMatricMotoristaCirculacao());
+			Log.i("PCA", "matricPacienteCirculacao = " + circulacaoBeanBD.getMatricPacienteCirculacao());
+			Log.i("PCA", "idEquipCirculacao = " + circulacaoBeanBD.getIdEquipCirculacao());
+			Log.i("PCA", "kmSaidaCirculacao = " + circulacaoBeanBD.getKmSaidaCirculacao());
+			Log.i("PCA", "kmRetornoCirculacao = " + circulacaoBeanBD.getKmRetornoCirculacao());
+			Log.i("PCA", "idLocalSaidaCirculacao = " + circulacaoBeanBD.getIdLocalSaidaCirculacao());
+			Log.i("PCA", "idLocalDestinoCirculacao = " + circulacaoBeanBD.getIdLocalDestinoCirculacao());
+			Log.i("PCA", "idOcorAtendCirculacao = " + circulacaoBeanBD.getIdOcorAtendCirculacao());
+			Log.i("PCA", "statusCirculacao = " + circulacaoBeanBD.getStatusCirculacao());
+		}
 
 	}
 

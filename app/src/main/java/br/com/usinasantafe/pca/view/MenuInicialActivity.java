@@ -60,7 +60,17 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         progressBar = new ProgressDialog(this);
 
-        atualizarAplic();
+        if(pcaContext.getCirculacaoCTR().verCirculacaoAberta()){
+            startTimer();
+            Intent it = new Intent(MenuInicialActivity.this, ListaInformacaoActivity.class);
+            startActivity(it);
+            finish();
+        }
+        else{
+            atualizarAplic();
+        }
+
+        clearBD();
 
         ArrayList<String> itens = new ArrayList<>();
 
@@ -127,7 +137,7 @@ public class MenuInicialActivity extends ActivityGeneric {
             }
         } else {
             VerifDadosServ.getInstance().setVerTerm(true);
-            startTimer("N_SD");
+            startTimer();
         }
     }
 
@@ -140,15 +150,13 @@ public class MenuInicialActivity extends ActivityGeneric {
                 if (progressBar.isShowing()) {
                     progressBar.dismiss();
                 }
-                startTimer("N_SD");
+                startTimer();
             }
             customHandler.postDelayed(this, 10000);
         }
     };
 
-    public void startTimer(String verAtual) {
-
-        Log.i("PMM", "VERATUAL = " + verAtual);
+    public void startTimer() {
 
         Intent intent = new Intent(this, ReceberAlarme.class);
 
@@ -184,14 +192,15 @@ public class MenuInicialActivity extends ActivityGeneric {
             } else if (EnvioDadosServ.getInstance().getStatusEnvio() == 3) {
                 textViewProcesso.setTextColor(Color.GREEN);
                 textViewProcesso.setText("Todos os Dados já foram Enviados");
-            } else {
-                textViewProcesso.setTextColor(Color.YELLOW);
-                textViewProcesso.setText("Verificando Dados...");
             }
         } else {
             textViewProcesso.setTextColor(Color.RED);
             textViewProcesso.setText("Aparelho sem Equipamento");
         }
+    }
+
+    public void clearBD() {
+        pcaContext.getCirculacaoCTR().delCircEnviado();
     }
 
 }

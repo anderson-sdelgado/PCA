@@ -69,6 +69,7 @@ public class PostCadGenerico extends AsyncTask<String, Void, String> {
 			
 		} catch (Exception e) {
 			LogErroDAO.getInstance().insert(e);
+			EnvioDadosServ.getInstance().setEnviando(false);
 			Tempo.getInstance().setEnvioDado(true);
 			if(bufferedReader != null){
 				try {
@@ -101,10 +102,11 @@ public class PostCadGenerico extends AsyncTask<String, Void, String> {
 
 		try {
 			Log.i("PCO", "VALOR RECEBIDO --> " + result);
+			EnvioDadosServ.getInstance().setEnviando(false);
 			EnvioDadosServ.getInstance().recDados(result);
 		} catch (Exception e) {
 			LogErroDAO.getInstance().insert(e);
-			EnvioDadosServ.getInstance().setPosEnvio(2);
+			EnvioDadosServ.getInstance().setEnviando(false);
 		}
 		
     }

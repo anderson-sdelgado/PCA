@@ -17,6 +17,7 @@ import java.util.Map;
 
 import br.com.usinasantafe.pca.control.ConfigCTR;
 import br.com.usinasantafe.pca.model.bean.AtualAplicBean;
+import br.com.usinasantafe.pca.model.dao.ConfigDAO;
 import br.com.usinasantafe.pca.model.pst.GenericRecordable;
 import br.com.usinasantafe.pca.util.connHttp.PostVerGenerico;
 import br.com.usinasantafe.pca.util.connHttp.UrlsConexaoHttp;
@@ -56,13 +57,14 @@ public class VerifDadosServ {
         if (!result.equals("")) {
             if (this.tipo.equals("Atualiza")) {
                 setVerTerm(true);
-                String verAtual = result.trim();
-                if (verAtual.equals("S")) {
+                ConfigDAO configDAO = new ConfigDAO();
+                AtualAplicBean atualAplicBean = configDAO.recAtual(result.trim());
+                if (atualAplicBean.getFlagAtualApp().equals(1L)) {
                     AtualizarAplicativo atualizarAplicativo = new AtualizarAplicativo();
                     atualizarAplicativo.setContext(this.menuInicialActivity);
                     atualizarAplicativo.execute();
                 } else {
-                    this.menuInicialActivity.startTimer(verAtual);
+                    this.menuInicialActivity.startTimer();
                 }
             }
         }

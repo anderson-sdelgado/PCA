@@ -17,6 +17,8 @@ public class ConfigBean extends Entidade {
     @DatabaseField
     private String senhaConfig;
     @DatabaseField
+    private String dthrServConfig;
+    @DatabaseField
     private Long flagLogEnvio;
     @DatabaseField
     private Long flagLogErro;
@@ -62,5 +64,13 @@ public class ConfigBean extends Entidade {
 
     public void setFlagLogErro(Long flagLogErro) {
         this.flagLogErro = flagLogErro;
+    }
+
+    public String getDthrServConfig() {
+        return dthrServConfig;
+    }
+
+    public void setDthrServConfig(String dthrServConfig) {
+        this.dthrServConfig = dthrServConfig;
     }
 }

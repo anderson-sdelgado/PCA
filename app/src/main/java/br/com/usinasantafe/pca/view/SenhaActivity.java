@@ -22,10 +22,10 @@ public class SenhaActivity extends ActivityGeneric {
         pcaContext = (PCAContext) getApplication();
 
         editTextSenha = (EditText)  findViewById(R.id.editTextSenha);
-        Button btOkSenha =  (Button) findViewById(R.id.buttonOkSenha);
-        Button btCancSenha = (Button) findViewById(R.id.buttonCancSenha);
+        Button buttonOkSenha =  (Button) findViewById(R.id.buttonOkSenha);
+        Button butttonCancSenha = (Button) findViewById(R.id.buttonCancSenha);
 
-        btOkSenha.setOnClickListener(new View.OnClickListener() {
+        buttonOkSenha.setOnClickListener(new View.OnClickListener() {
 
             @SuppressWarnings("unchecked")
             @Override
@@ -50,7 +50,7 @@ public class SenhaActivity extends ActivityGeneric {
             }
         });
 
-        btCancSenha.setOnClickListener(new View.OnClickListener() {
+        butttonCancSenha.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

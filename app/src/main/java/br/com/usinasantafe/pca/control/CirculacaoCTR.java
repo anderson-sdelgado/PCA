@@ -37,6 +37,16 @@ public class CirculacaoCTR {
         return colabDAO.verColab(matricColab);
     }
 
+    public boolean verCirculacaoAberta(){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        return circulacaoDAO.verCirculacaoAberta();
+    }
+
+    public boolean verCirculacaoNEnviado(){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        return circulacaoDAO.verCirculacaoNEnviado();
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////// SALVAR/ATUALIZAR/EXCLUIR DADOS /////////////////////////////////
@@ -50,6 +60,16 @@ public class CirculacaoCTR {
     public void delCircAberto(){
         CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
         circulacaoDAO.delCircAberto();
+    }
+
+    public void updatePassageiro(String retorno) {
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        circulacaoDAO.updateCirculacao(retorno);
+    }
+
+    public void delCircEnviado(){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        circulacaoDAO.delCircEnviado();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,6 +119,11 @@ public class CirculacaoCTR {
     public List<OcorAtendBean> ocorAtendList(){
         OcorAtendDAO ocorAtendDAO = new OcorAtendDAO();
         return ocorAtendDAO.ocorAtendList();
+    }
+
+    public String dadosEnvio(){
+        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
+        return circulacaoDAO.dadosEnvio();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////

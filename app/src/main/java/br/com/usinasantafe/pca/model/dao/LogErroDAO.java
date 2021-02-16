@@ -12,7 +12,7 @@ import java.io.StringWriter;
 import java.util.List;
 
 import br.com.usinasantafe.pca.control.ConfigCTR;
-import br.com.usinasantafe.pca.model.bean.LogErroBean;
+import br.com.usinasantafe.pca.model.bean.variaveis.LogErroBean;
 import br.com.usinasantafe.pca.model.bean.variaveis.ConfigBean;
 import br.com.usinasantafe.pca.util.Tempo;
 
