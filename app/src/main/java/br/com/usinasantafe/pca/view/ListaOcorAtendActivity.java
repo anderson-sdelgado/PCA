@@ -32,10 +32,10 @@ public class ListaOcorAtendActivity extends ActivityGeneric {
         setContentView(R.layout.activity_lista_ocor_atend);
 
         pcaContext = (PCAContext) getApplication();
-        Button buttonRetListaOcorAtend = (Button) findViewById(R.id.buttonRetListaOcorAtend);
-        Button buttonAtualListaOcorAtend = (Button) findViewById(R.id.buttonAtualListaOcorAtend);
+        Button buttonRetListaOcorAtend = findViewById(R.id.buttonRetListaOcorAtend);
+        Button buttonAtualListaOcorAtend = findViewById(R.id.buttonAtualListaOcorAtend);
 
-        ArrayList<String> itens = new ArrayList<String>();
+        ArrayList<String> itens = new ArrayList<>();
 
         ocorAtendList = pcaContext.getCirculacaoCTR().ocorAtendList();
         for(OcorAtendBean ocorAtendBean : ocorAtendList){
@@ -43,89 +43,65 @@ public class ListaOcorAtendActivity extends ActivityGeneric {
         }
 
         AdapterList adapterList = new AdapterList(this, itens);
-        ocorAtendListView = (ListView) findViewById(R.id.listaOcorAtend);
+        ocorAtendListView = findViewById(R.id.listaOcorAtend);
         ocorAtendListView.setAdapter(adapterList);
 
-        ocorAtendListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ocorAtendListView.setOnItemClickListener((l, v, position, id) -> {
 
-            @Override
-            public void onItemClick(AdapterView<?> l, View v, int position,
-                                    long id) {
+            OcorAtendBean ocorAtendBean = ocorAtendList.get(position);
+            pcaContext.getCirculacaoCTR().setIdOcorAtendCirculacao(ocorAtendBean.getIdOcorAtend());
 
-                OcorAtendBean ocorAtendBean = ocorAtendList.get(position);
-                pcaContext.getCirculacaoCTR().setIdOcorAtendCirculacao(ocorAtendBean.getIdOcorAtend());
+            ocorAtendList.clear();
 
-                ocorAtendList.clear();
-
-                pcaContext.setVerTela(1);
-                Intent it = new Intent(ListaOcorAtendActivity.this, KilometragemActivity.class);
-                startActivity(it);
-                finish();
-
-            }
+            pcaContext.setVerTela(1);
+            Intent it = new Intent(ListaOcorAtendActivity.this, KilometragemActivity.class);
+            startActivity(it);
+            finish();
 
         });
 
-        buttonRetListaOcorAtend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(ListaOcorAtendActivity.this, ListaLocalDestinoActivity.class);
-                startActivity(it);
-                finish();
-            }
+        buttonRetListaOcorAtend.setOnClickListener(v -> {
+            Intent it = new Intent(ListaOcorAtendActivity.this, ListaLocalDestinoActivity.class);
+            startActivity(it);
+            finish();
         });
 
-        buttonAtualListaOcorAtend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonAtualListaOcorAtend.setOnClickListener(v -> {
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder(ListaOcorAtendActivity.this);
-                alerta.setTitle("ATENÇÃO");
-                alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
-                alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder(ListaOcorAtendActivity.this);
+            alerta.setTitle("ATENÇÃO");
+            alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
+            alerta.setNegativeButton("SIM", (dialog, which) -> {
 
-                        ConexaoWeb conexaoWeb = new ConexaoWeb();
+                ConexaoWeb conexaoWeb = new ConexaoWeb();
 
-                        if (conexaoWeb.verificaConexao(ListaOcorAtendActivity.this)) {
+                if (conexaoWeb.verificaConexao(ListaOcorAtendActivity.this)) {
 
-                            progressBar = new ProgressDialog(ListaOcorAtendActivity.this);
-                            progressBar.setCancelable(true);
-                            progressBar.setMessage("ATUALIZANDO OCORRÊNCIA DE ATENDIMENTO...");
-                            progressBar.show();
+                    progressBar = new ProgressDialog(ListaOcorAtendActivity.this);
+                    progressBar.setCancelable(true);
+                    progressBar.setMessage("ATUALIZANDO OCORRÊNCIA DE ATENDIMENTO...");
+                    progressBar.show();
 
-                            pcaContext.getCirculacaoCTR().atualDadosLocal(ListaOcorAtendActivity.this
-                                    , ListaOcorAtendActivity.class, progressBar);
+                    pcaContext.getCirculacaoCTR().atualDadosLocal(ListaOcorAtendActivity.this
+                            , ListaOcorAtendActivity.class, progressBar);
 
-                        } else {
+                } else {
 
-                            AlertDialog.Builder alerta = new AlertDialog.Builder(ListaOcorAtendActivity.this);
-                            alerta.setTitle("ATENÇÃO");
-                            alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
-                            alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                    AlertDialog.Builder alerta1 = new AlertDialog.Builder(ListaOcorAtendActivity.this);
+                    alerta1.setTitle("ATENÇÃO");
+                    alerta1.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
+                    alerta1.setPositiveButton("OK", (dialog1, which1) -> {});
 
-                                }
-                            });
+                    alerta1.show();
 
-                            alerta.show();
+                }
 
-                        }
+            });
 
-                    }
-                });
+            alerta.setPositiveButton("NÃO", (dialog, which) -> {});
 
-                alerta.setPositiveButton("NÃO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
+            alerta.show();
 
-                alerta.show();
-
-            }
         });
 
     }

@@ -6,63 +6,28 @@ package br.com.usinasantafe.pca.model.bean;
 
 public class AtualAplicBean {
 
-    private Long nroAparelhoAtual;
-    private String versaoAtual;
-    private String versaoNova;
-    private Long flagAtualApp;
-    private Long flagLogEnvio;
-    private Long flagLogErro;
+    private Long nroAparelho;
+    private String versao;
     private String dthr;
+    private String token;
 
     public AtualAplicBean() {
     }
 
-    public Long getNroAparelhoAtual() {
-        return nroAparelhoAtual;
+    public Long getNroAparelho() {
+        return nroAparelho;
     }
 
-    public void setNroAparelhoAtual(Long nroAparelhoAtual) {
-        this.nroAparelhoAtual = nroAparelhoAtual;
+    public void setNroAparelho(Long nroAparelho) {
+        this.nroAparelho = nroAparelho;
     }
 
-    public String getVersaoAtual() {
-        return versaoAtual;
+    public String getVersao() {
+        return versao;
     }
 
-    public void setVersaoAtual(String versaoAtual) {
-        this.versaoAtual = versaoAtual;
-    }
-
-    public String getVersaoNova() {
-        return versaoNova;
-    }
-
-    public void setVersaoNova(String versaoNova) {
-        this.versaoNova = versaoNova;
-    }
-
-    public Long getFlagAtualApp() {
-        return flagAtualApp;
-    }
-
-    public void setFlagAtualApp(Long flagAtualApp) {
-        this.flagAtualApp = flagAtualApp;
-    }
-
-    public Long getFlagLogEnvio() {
-        return flagLogEnvio;
-    }
-
-    public void setFlagLogEnvio(Long flagLogEnvio) {
-        this.flagLogEnvio = flagLogEnvio;
-    }
-
-    public Long getFlagLogErro() {
-        return flagLogErro;
-    }
-
-    public void setFlagLogErro(Long flagLogErro) {
-        this.flagLogErro = flagLogErro;
+    public void setVersao(String versao) {
+        this.versao = versao;
     }
 
     public String getDthr() {
@@ -71,5 +36,13 @@ public class AtualAplicBean {
 
     public void setDthr(String dthr) {
         this.dthr = dthr;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

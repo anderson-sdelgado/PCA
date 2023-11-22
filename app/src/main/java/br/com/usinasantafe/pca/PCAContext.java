@@ -10,7 +10,8 @@ public class PCAContext extends Application {
 
     private Thread.UncaughtExceptionHandler mDefaultExceptionHandler;
 
-    public static String versaoAplic = "1.00";
+    public static String versaoWS = "2.00";
+
     private CirculacaoCTR circulacaoCTR;
     private ConfigCTR configCTR;
     private int verTela;
@@ -44,7 +45,7 @@ public class PCAContext extends Application {
 
     private Thread.UncaughtExceptionHandler handler = new Thread.UncaughtExceptionHandler() {
         public void uncaughtException(Thread thread, Throwable ex) {
-            LogErroDAO.getInstance().insert(ex);
+            LogErroDAO.getInstance().insertLogErro(ex);
             mDefaultExceptionHandler.uncaughtException(thread, ex);
         }
     };

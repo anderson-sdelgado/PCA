@@ -31,7 +31,7 @@ public abstract class Entidade implements Serializable {
 			return dao;
 
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 			throw new RuntimeException(e);
 		}
 
@@ -41,7 +41,7 @@ public abstract class Entidade implements Serializable {
 		try {
 			this.daoImpl().create(this);
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 		}
 	}
 
@@ -50,7 +50,7 @@ public abstract class Entidade implements Serializable {
 		try {
 			this.daoImpl().update(this);
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 		}
 	}
 
@@ -58,7 +58,7 @@ public abstract class Entidade implements Serializable {
 		try {
 			this.daoImpl().delete(this);
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 		}
 	}
 
@@ -67,7 +67,7 @@ public abstract class Entidade implements Serializable {
 			DeleteBuilder<String, Object> deleteBuilder = this.daoImpl().deleteBuilder();
 			deleteBuilder.delete();
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 		}
 	}
 
@@ -75,7 +75,7 @@ public abstract class Entidade implements Serializable {
 		try {
 			return this.daoImpl().queryForAll();
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -84,7 +84,7 @@ public abstract class Entidade implements Serializable {
 		try {
 			return this.daoImpl().queryForEq(campo, valor);
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -112,7 +112,7 @@ public abstract class Entidade implements Serializable {
 			PreparedQuery preparedQuery = queryBuilder.prepare();
 			return this.daoImpl().query(preparedQuery);
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -127,7 +127,7 @@ public abstract class Entidade implements Serializable {
 			PreparedQuery preparedQuery = queryBuilder.prepare();
 			return this.daoImpl().query(preparedQuery);
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -156,7 +156,7 @@ public abstract class Entidade implements Serializable {
 			PreparedQuery preparedQuery = queryBuilder.prepare();
 			return this.daoImpl().query(preparedQuery);
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -171,7 +171,7 @@ public abstract class Entidade implements Serializable {
 			return this.daoImpl().query(preparedQuery);
 
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -183,7 +183,7 @@ public abstract class Entidade implements Serializable {
 				return true;
 			}
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 		}
 		return false;
 	}
@@ -206,7 +206,7 @@ public abstract class Entidade implements Serializable {
 			PreparedQuery preparedQuery = queryBuilder.prepare();
 			return this.daoImpl().query(preparedQuery);
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -221,7 +221,7 @@ public abstract class Entidade implements Serializable {
 			PreparedQuery preparedQuery = queryBuilder.prepare();
 			return this.daoImpl().query(preparedQuery);
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -244,7 +244,7 @@ public abstract class Entidade implements Serializable {
 			PreparedQuery preparedQuery = queryBuilder.prepare();
 			return this.daoImpl().query(preparedQuery);
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -268,7 +268,7 @@ public abstract class Entidade implements Serializable {
 			PreparedQuery preparedQuery = queryBuilder.prepare();
 			return this.daoImpl().query(preparedQuery);
 		} catch (SQLException e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 			throw new RuntimeException(e);
 		}
 	}

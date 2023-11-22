@@ -9,32 +9,20 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".view.ListaInformacaoActivity">
+    tools:context=".view.TelaInicialActivity">
 
     <TextView
-        android:id="@+id/textViewListaInfo"
+        android:id="@+id/textInicioApp"
         style="@style/TextViewTituloLista"
-        android:text="@string/texto_informacao" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/texto_inicio" />
 
-    <ListView
-        android:id="@+id/listaViewInfo"
+    <ProgressBar
+        android:id="@+id/progressBarIniciandoApp"
+        style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        />
-
-    <Button
-        android:id="@+id/buttonFinalizarViagem"
-        style="@style/BotaoAvulso"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/texto_finalizar_viagem" />
-
-    <Button
-        android:id="@+id/buttonCancViagem"
-        style="@style/BotaoAvulso"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/texto_canc_viagem" />
+        android:layout_weight="1" />
 
 </LinearLayout>

@@ -2,7 +2,7 @@ package br.com.usinasantafe.pca.util;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.util.Log;
+import android.net.NetworkInfo;
 
 public class ConexaoWeb {
 
@@ -10,18 +10,19 @@ public class ConexaoWeb {
 	}
 	
 	public  boolean verificaConexao(Context context) {
-	    boolean conectado;  
-	    ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-	    if (cm.getActiveNetworkInfo() != null  
-	            && cm.getActiveNetworkInfo().isAvailable()  
-	            && cm.getActiveNetworkInfo().isConnected()) {  
-	        conectado = true;
-	        Log.i("PCO", "CONECTA");
-	    } else {  
-	        conectado = false;  
-	        Log.i("PCO", "NAO CONECTA");
-	    }  
-	    return conectado;  
+		ConnectivityManager connectivityManager = (ConnectivityManager)
+				context.getSystemService(context.CONNECTIVITY_SERVICE);
+		if(connectivityManager != null){
+			NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
+			if(info != null){
+				for(int i = 0; i < info.length; i++){
+					if(info[i].getState() == NetworkInfo.State.CONNECTED){
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	} 
 	
 }

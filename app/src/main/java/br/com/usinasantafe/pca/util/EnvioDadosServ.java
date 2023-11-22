@@ -16,9 +16,7 @@ public class EnvioDadosServ {
 
     private static EnvioDadosServ instance = null;
     private UrlsConexaoHttp urlsConexaoHttp;
-    private int statusEnvio; //1 - Enviando; 2 - Existe Dados para Enviar; 3 - Todos os Dados Enviados
-    private int posEnvio;
-    private boolean enviando = false;
+    public static int status; //1 - Existe Dados para Enviar; 2 - Enviado; 3 - Todos os Dados Foram Enviados;
 
     public EnvioDadosServ() {
         urlsConexaoHttp = new UrlsConexaoHttp();
@@ -33,27 +31,22 @@ public class EnvioDadosServ {
 
 
     public void envioDados(Context context) {
-        enviando = true;
+        status = 1;
         ConexaoWeb conexaoWeb = new ConexaoWeb();
         if (conexaoWeb.verificaConexao(context)) {
-            envioDadosPrinc();
+            status = 2;
+            if (EnvioDadosServ.getInstance().verifDadosEnvio()) {
+                envioDadosPrinc();
+            } else {
+                status = 3;
+            }
         }
-        else{
-            enviando = false;
-        }
-
     }
 
     public void envioDadosPrinc() {
         CirculacaoCTR circulacaoCTR = new CirculacaoCTR();
-        ConfigCTR configCTR = new ConfigCTR();
-        if (configCTR.verEnvioLogErro()) {
-            envioLogErro();
-        }
-        else {
-            if(circulacaoCTR.verCirculacaoNEnviado()){
-                envioCirculacao();
-            }
+        if(circulacaoCTR.verCirculacaoNEnviado()){
+            envioCirculacao();
         }
     }
 
@@ -76,46 +69,13 @@ public class EnvioDadosServ {
 
     }
 
-    public void envioLogErro() {
-
-        ConfigCTR configCTR = new ConfigCTR();
-        String dados = configCTR.dadosEnvioLogErro();
-
-        Log.i("PMM", "LOG ERRO = " + dados);
-
-        String[] url = {urlsConexaoHttp.getsInsertLogErro()};
-        Map<String, Object> parametrosPost = new HashMap<String, Object>();
-        parametrosPost.put("dado", dados);
-
-        PostCadGenerico postCadGenerico = new PostCadGenerico();
-        postCadGenerico.setParametrosPost(parametrosPost);
-        postCadGenerico.execute(url);
-
-    }
-
     public boolean verifDadosEnvio() {
         CirculacaoCTR circulacaoCTR = new CirculacaoCTR();
-        ConfigCTR configCTR = new ConfigCTR();
-        if ((!circulacaoCTR.verCirculacaoNEnviado())
-                && (!configCTR.verEnvioLogErro())){
-            enviando = false;
+        if ((!circulacaoCTR.verCirculacaoNEnviado())){
             return false;
         } else {
             return true;
         }
-    }
-
-    public int getStatusEnvio() {
-        if (enviando) {
-            statusEnvio = 1;
-        } else {
-            if (!verifDadosEnvio()) {
-                statusEnvio = 3;
-            } else {
-                statusEnvio = 2;
-            }
-        }
-        return statusEnvio;
     }
 
     ////////////////////////////////////MECANISMO RECEBIMENTO/////////////////////////////////////////
@@ -124,34 +84,9 @@ public class EnvioDadosServ {
         if(result.trim().startsWith("SALVOU")) {
             CirculacaoCTR circulacaoCTR = new CirculacaoCTR();
             circulacaoCTR.updatePassageiro(result);
-        } else if (result.trim().startsWith("LOGERRO")) {
-            ConfigCTR configCTR = new ConfigCTR();
-            configCTR.updLogErro(result);
-        }
-        else{
-            LogErroDAO.getInstance().insert(result);
+        } else {
+            LogErroDAO.getInstance().insertLogErro(result);
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-
-    public void setStatusEnvio(int statusEnvio) {
-        this.statusEnvio = statusEnvio;
-    }
-
-    public int getPosEnvio() {
-        return posEnvio;
-    }
-
-    public void setPosEnvio(int posEnvio) {
-        this.posEnvio = posEnvio;
-    }
-
-    public boolean isEnviando() {
-        return enviando;
-    }
-
-    public void setEnviando(boolean enviando) {
-        this.enviando = enviando;
-    }
 }

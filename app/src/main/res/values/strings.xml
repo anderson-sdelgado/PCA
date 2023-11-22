@@ -178,4 +178,5 @@
     <string name="texto_informacao">INFORMAÇÕES</string>
     <string name="texto_canc_viagem">CANCELAR VIAGEM</string>
     <string name="texto_finalizar_viagem">FINALIZAR VIAGEM</string>
+    <string name="texto_inicio">INICIANDO O APLICATIVO...</string>
 </resources>

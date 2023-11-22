@@ -29,12 +29,12 @@ public class LeitorUsuarioActivity extends ActivityGeneric {
 
         pcaContext = (PCAContext) getApplication();
 
-        txtRetUsu = (TextView) findViewById(R.id.txtRetUsu);
-        Button buttonOkUsu = (Button) findViewById(R.id.buttonOkUsu);
-        Button buttonCancUsu = (Button) findViewById(R.id.buttonCancUsu);
-        Button buttonDigUsu = (Button) findViewById(R.id.buttonDigUsu);
-        Button buttonAtualPadrao = (Button) findViewById(R.id.buttonAtualPadrao);
-        Button buttonCaptMatric = (Button) findViewById(R.id.buttonCaptMatric);
+        txtRetUsu = findViewById(R.id.txtRetUsu);
+        Button buttonOkUsu = findViewById(R.id.buttonOkUsu);
+        Button buttonCancUsu = findViewById(R.id.buttonCancUsu);
+        Button buttonDigUsu = findViewById(R.id.buttonDigUsu);
+        Button buttonAtualPadrao = findViewById(R.id.buttonAtualPadrao);
+        Button buttonCaptMatric = findViewById(R.id.buttonCaptMatric);
 
         colabBean = new ColabBean();
         colabBean.setMatricColab(0L);
@@ -42,107 +42,71 @@ public class LeitorUsuarioActivity extends ActivityGeneric {
 
         txtRetUsu.setText("POR FAVOR, REALIZE A LEITURA DO CARTÃO DO COLABORADOR REQUISITANDO.");
 
-        buttonOkUsu.setOnClickListener(new View.OnClickListener() {
+        buttonOkUsu.setOnClickListener(v -> {
 
-            @Override
-            public void onClick(View v) {
+            if (colabBean.getMatricColab() > 0) {
 
-                if (colabBean.getMatricColab() > 0) {
+                pcaContext.getCirculacaoCTR().criarCirculacao(colabBean.getMatricColab());
 
-                    pcaContext.getCirculacaoCTR().criarCirculacao(colabBean.getMatricColab());
+                Intent it = new Intent(LeitorUsuarioActivity.this, LeitorColabActivity.class);
+                startActivity(it);
+                finish();
+            }
 
-                    Intent it = new Intent(LeitorUsuarioActivity.this, LeitorColabActivity.class);
-                    startActivity(it);
-                    finish();
+        });
+
+        buttonCancUsu.setOnClickListener(v -> {
+            Intent it = new Intent(LeitorUsuarioActivity.this, MenuInicialActivity.class);
+            startActivity(it);
+            finish();
+        });
+
+        buttonDigUsu.setOnClickListener(v -> {
+            Intent it = new Intent(LeitorUsuarioActivity.this, DigUsuarioActivity.class);
+            startActivity(it);
+            finish();
+        });
+
+        buttonCaptMatric.setOnClickListener(v -> {
+            Intent it = new Intent(LeitorUsuarioActivity.this, br.com.usinasantafe.pca.zxing.CaptureActivity.class);
+            startActivityForResult(it, REQUEST_CODE);
+        });
+
+        buttonAtualPadrao.setOnClickListener(v -> {
+
+            AlertDialog.Builder alerta = new AlertDialog.Builder(LeitorUsuarioActivity.this);
+            alerta.setTitle("ATENÇÃO");
+            alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
+            alerta.setNegativeButton("SIM", (dialog, which) -> {
+
+                ConexaoWeb conexaoWeb = new ConexaoWeb();
+
+                if (conexaoWeb.verificaConexao(LeitorUsuarioActivity.this)) {
+
+                    progressBar = new ProgressDialog(LeitorUsuarioActivity.this);
+                    progressBar.setCancelable(true);
+                    progressBar.setMessage("ATUALIZANDO COLABORADOR...");
+                    progressBar.show();
+
+                    pcaContext.getCirculacaoCTR().atualDadosColab(LeitorUsuarioActivity.this
+                            , LeitorUsuarioActivity.class, progressBar);
+
+                } else {
+
+                    AlertDialog.Builder alerta1 = new AlertDialog.Builder(LeitorUsuarioActivity.this);
+                    alerta1.setTitle("ATENÇÃO");
+                    alerta1.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
+                    alerta1.setPositiveButton("OK", (dialog1, which1) -> {});
+
+                    alerta1.show();
+
                 }
 
-            }
-        });
+            });
 
-        buttonCancUsu.setOnClickListener(new View.OnClickListener() {
+            alerta.setPositiveButton("NÃO", (dialog, which) -> {});
 
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(LeitorUsuarioActivity.this, MenuInicialActivity.class);
-                startActivity(it);
-                finish();
-            }
-
-        });
-
-        buttonDigUsu.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(LeitorUsuarioActivity.this, DigUsuarioActivity.class);
-                startActivity(it);
-                finish();
-            }
-
-        });
-
-        buttonCaptMatric.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(LeitorUsuarioActivity.this, br.com.usinasantafe.pca.zxing.CaptureActivity.class);
-                startActivityForResult(it, REQUEST_CODE);
-            }
-
-        });
-
-        buttonAtualPadrao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                AlertDialog.Builder alerta = new AlertDialog.Builder(LeitorUsuarioActivity.this);
-                alerta.setTitle("ATENÇÃO");
-                alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
-                alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        ConexaoWeb conexaoWeb = new ConexaoWeb();
-
-                        if (conexaoWeb.verificaConexao(LeitorUsuarioActivity.this)) {
-
-                            progressBar = new ProgressDialog(LeitorUsuarioActivity.this);
-                            progressBar.setCancelable(true);
-                            progressBar.setMessage("ATUALIZANDO COLABORADOR...");
-                            progressBar.show();
-
-                            pcaContext.getCirculacaoCTR().atualDadosColab(LeitorUsuarioActivity.this
-                                    , LeitorUsuarioActivity.class, progressBar);
-
-                        } else {
-
-                            AlertDialog.Builder alerta = new AlertDialog.Builder(LeitorUsuarioActivity.this);
-                            alerta.setTitle("ATENÇÃO");
-                            alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
-                            alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            });
-
-                            alerta.show();
-
-                        }
-
-                    }
-                });
-
-                alerta.setPositiveButton("NÃO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-                alerta.show();
-
-            }
+            alerta.show();
 
         });
 

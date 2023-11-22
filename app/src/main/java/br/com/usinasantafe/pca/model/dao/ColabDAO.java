@@ -43,35 +43,4 @@ public class ColabDAO {
         return colabBean.get("matricColab", matricColab);
     }
 
-    public void verColab(String dado, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
-        VerifDadosServ.getInstance().setVerTerm(true);
-        VerifDadosServ.getInstance().verDados(dado, "Colab", telaAtual, telaProx, progressDialog);
-    }
-
-    public void recDadosColab(String result){
-
-        try {
-
-            JSONObject jObj = new JSONObject(result);
-            JSONArray jsonArray = jObj.getJSONArray("dados");
-
-            if (jsonArray.length() > 0) {
-
-                JSONObject objeto = jsonArray.getJSONObject(0);
-                Gson gson = new Gson();
-                ColabBean colabBean = gson.fromJson(objeto.toString(), ColabBean.class);
-                colabBean.insert();
-
-                VerifDadosServ.getInstance().pulaTelaSemTerm();
-
-            } else {
-                VerifDadosServ.getInstance().msgSemTerm("COLABORADOR INEXISTENTE NA BASE DE DADOS! FAVOR VERIFICA A NUMERAÇÃO.");
-            }
-
-        } catch (Exception e) {
-            LogErroDAO.getInstance().insert(e);
-            VerifDadosServ.getInstance().msgSemTerm("FALHA DE PESQUISA DE COLABORADOR! POR FAVOR, TENTAR NOVAMENTE COM UM SINAL MELHOR.");
-        }
-    }
-
 }

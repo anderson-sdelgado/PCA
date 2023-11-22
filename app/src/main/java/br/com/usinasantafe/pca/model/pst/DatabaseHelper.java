@@ -58,7 +58,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 		}
 		catch(Exception e){
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 		}
 		
 	}
@@ -78,7 +78,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			
 			
 		} catch (Exception e) {
-			LogErroDAO.getInstance().insert(e);
+			LogErroDAO.getInstance().insertLogErro(e);
 		}
 		
 	}

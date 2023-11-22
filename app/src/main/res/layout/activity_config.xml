@@ -19,7 +19,7 @@
         android:text="@string/texto_nro_linha" />
 
     <EditText
-        android:id="@+id/editTextAparelhoConfig"
+        android:id="@+id/editTextNroAparelhoConfig"
         style="@style/EditView"
         android:inputType="number" />
 

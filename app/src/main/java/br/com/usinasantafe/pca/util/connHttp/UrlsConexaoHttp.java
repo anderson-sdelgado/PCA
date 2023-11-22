@@ -4,40 +4,39 @@ import br.com.usinasantafe.pca.PCAContext;
 
 public class UrlsConexaoHttp {
 
-    public static String urlPrincipal = "http://www.usinasantafe.com.br/pcaqa/view/";
-    public static String urlPrincEnvio = "http://www.usinasantafe.com.br/pcaqa/view/";
+    public static String versao = "versao_" + PCAContext.versaoWS.replace(".", "_");
+
+    public static String url = "https://www.usinasantafe.com.br/pcadev/view/";
+//	public static String url = "https://www.usinasantafe.com.br/pcaqa/view/";
+//    public static String url = "https://www.usinasantafe.com.br/pcaprod/" + versao + "/view/";
 
     public static String localPSTEstatica = "br.com.usinasantafe.pca.model.bean.estaticas.";
     public static String localUrl = "br.com.usinasantafe.pca.util.connHttp.UrlsConexaoHttp";
 
-    public static String put = "?versao=" + PCAContext.versaoAplic.replace(".", "_");
-
-    public static String ColabBean = urlPrincipal + "colab.php" + put;
-    public static String EquipBean = urlPrincipal + "equip.php" + put;
-    public static String LocalBean = urlPrincipal + "local.php" + put;
-    public static String OcorAtendBean = urlPrincipal + "ocoratend.php" + put;
+    public static String ColabBean = url + "colab.php";
+    public static String EquipBean = url + "equip.php";
+    public static String LocalBean = url + "local.php";
+    public static String OcorAtendBean = url + "ocoratend.php";
 
     public UrlsConexaoHttp() {
     }
 
     public String getsInserirCirculacao() {
-        return urlPrincEnvio + "inserircirculacao.php" + put;
-    }
-
-    public String getsInsertLogErro() {
-        return urlPrincEnvio + "inserirlogerro.php" + put;
+        return url + "inserircirculacao.php";
     }
 
     public String urlVerifica(String classe) {
         String retorno = "";
         if (classe.equals("Equip")) {
-            retorno = urlPrincipal + "equip.php" + put;
+            retorno = url + "equip.php";
         } else if (classe.equals("Atualiza")) {
-            retorno = urlPrincEnvio + "atualaplic.php" + put;
+            retorno = url + "atualaplic.php";
         } else if (classe.equals("Moto")) {
-            retorno = urlPrincEnvio + "atualmoto.php" + put;
+            retorno = url + "atualmoto.php";
         } else if (classe.equals("Colab")) {
-            retorno = urlPrincEnvio + "atualcolab.php" + put;
+            retorno = url + "atualcolab.php";
+        } else if (classe.equals("Token")) {
+            retorno = url + "aparelho.php";
         }
         return retorno;
     }

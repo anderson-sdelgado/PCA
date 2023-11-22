@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.j256.ormlite.field.DatabaseField;
-
 import java.util.List;
 
 import br.com.usinasantafe.pca.model.bean.variaveis.CirculacaoBean;
@@ -14,7 +12,7 @@ import br.com.usinasantafe.pca.model.pst.DatabaseHelper;
 import br.com.usinasantafe.pca.util.EnvioDadosServ;
 import br.com.usinasantafe.pca.util.Tempo;
 
-public class ReceberAlarme extends BroadcastReceiver {
+public class NetworkChangeListerner extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -23,13 +21,8 @@ public class ReceberAlarme extends BroadcastReceiver {
 			new DatabaseHelper(context);
 		}
 
-		Log.i("PCO", "DATA HORA = " + Tempo.getInstance().dataComHora());
-
-		if (EnvioDadosServ.getInstance().verifDadosEnvio()) {
-			Log.i("PMM", "ENVIANDO");
-			EnvioDadosServ.getInstance().envioDados(context);
-		}
-
+		Log.i("PCO", "DATA HORA = " + Tempo.getInstance().dthrAtualString());
+		EnvioDadosServ.getInstance().envioDados(context);
 		dados();
 
 	}

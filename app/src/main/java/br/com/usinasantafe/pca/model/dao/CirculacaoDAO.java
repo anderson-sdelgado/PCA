@@ -64,14 +64,15 @@ public class CirculacaoDAO {
 
     public void setKmSaidaCirculacao(Double kmSaida){
         circulacaoBean.setKmSaidaCirculacao(kmSaida);
-        circulacaoBean.setDthrSaidaCirculacao(Tempo.getInstance().dataComHora());
+        circulacaoBean.setDthrSaidaCirculacao(Tempo.getInstance().dthrAtualString());
+        circulacaoBean.setDthrLongSaidaCirculacao(Tempo.getInstance().dthrAtualLong());
         circulacaoBean.insert();
     }
 
     public void setKmRetornoCirculacao(Double kmRetorno){
         CirculacaoBean circulacaoBean = getCirculacaoAberta();
         circulacaoBean.setKmRetornoCirculacao(kmRetorno);
-        circulacaoBean.setDthrRetornoCirculacao(Tempo.getInstance().dataComHora());
+        circulacaoBean.setDthrRetornoCirculacao(Tempo.getInstance().dthrAtualString());
         circulacaoBean.setStatusCirculacao(2L);
         circulacaoBean.update();
     }
@@ -163,11 +164,9 @@ public class CirculacaoDAO {
 
             }
 
-            EnvioDadosServ.getInstance().setStatusEnvio(3);
-
         }
         catch(Exception e){
-            LogErroDAO.getInstance().insert(e);
+            LogErroDAO.getInstance().insertLogErro(e);
         }
 
     }
@@ -175,7 +174,7 @@ public class CirculacaoDAO {
     public void delCircEnviado(){
 
         for(CirculacaoBean circulacaoBean : circulacaoEnviadoList()){
-            if(Tempo.getInstance().timeDataHora(circulacaoBean.getDthrSaidaCirculacao()) <= Tempo.getInstance().timeMenos1Mes()){
+            if(circulacaoBean.getDthrLongSaidaCirculacao() < Tempo.getInstance().dthrLongDiaMenos(15)){
                 circulacaoBean.delete();
             }
         }

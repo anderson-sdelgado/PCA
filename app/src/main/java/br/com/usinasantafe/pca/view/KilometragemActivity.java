@@ -2,7 +2,6 @@ package br.com.usinasantafe.pca.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -21,10 +20,10 @@ public class KilometragemActivity extends ActivityGeneric {
 
         pcaContext = (PCAContext) getApplication();
 
-        Button buttonOkKilometragem = (Button) findViewById(R.id.buttonOkPadrao);
-        Button buttonCancKilometragem = (Button) findViewById(R.id.buttonCancPadrao);
+        Button buttonOkKilometragem = findViewById(R.id.buttonOkPadrao);
+        Button buttonCancKilometragem = findViewById(R.id.buttonCancPadrao);
 
-        TextView textViewKilometragem = (TextView) findViewById(R.id.textViewPadrao);
+        TextView textViewKilometragem = findViewById(R.id.textViewPadrao);
         if(pcaContext.getVerTela() == 1){
             textViewKilometragem.setText("KILOMETRAGEM INICIAL:");
         }
@@ -32,60 +31,50 @@ public class KilometragemActivity extends ActivityGeneric {
             textViewKilometragem.setText("KILOMETRAGEM FINAL:");
         }
 
-        buttonOkKilometragem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonOkKilometragem.setOnClickListener(v -> {
 
-                if (!editTextPadrao.getText().toString().equals("")) {
+            if (!editTextPadrao.getText().toString().equals("")) {
 
-                    String kilometragem = editTextPadrao.getText().toString();
-                    kilometragemNum = Double.valueOf(kilometragem.replace(",", "."));
+                String kilometragem = editTextPadrao.getText().toString();
+                kilometragemNum = Double.valueOf(kilometragem.replace(",", "."));
 
-                    if (pcaContext.getVerTela() == 1) {
+                if (pcaContext.getVerTela() == 1) {
 
-                        pcaContext.getCirculacaoCTR().setKmSaidaCirculacao(kilometragemNum);
+                    pcaContext.getCirculacaoCTR().setKmSaidaCirculacao(kilometragemNum);
 
-                        Intent it = new Intent(KilometragemActivity.this, ListaInformacaoActivity.class);
-                        startActivity(it);
-                        finish();
+                    Intent it = new Intent(KilometragemActivity.this, ListaInforActivity.class);
+                    startActivity(it);
 
-                    }
-                    else{
+                } else {
 
-                        pcaContext.getCirculacaoCTR().setKmRetornoCirculacao(kilometragemNum);
-                        Intent it = new Intent(KilometragemActivity.this, MenuInicialActivity.class);
-                        startActivity(it);
-                        finish();
-
-                    }
+                    pcaContext.getCirculacaoCTR().setKmRetornoCirculacao(kilometragemNum);
+                    Intent it = new Intent(KilometragemActivity.this, MenuInicialActivity.class);
+                    startActivity(it);
 
                 }
+                finish();
 
             }
+
         });
 
-        buttonCancKilometragem.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (editTextPadrao.getText().toString().length() > 0) {
-                    editTextPadrao.setText(editTextPadrao.getText().toString().substring(0, editTextPadrao.getText().toString().length() - 1));
-                }
+        buttonCancKilometragem.setOnClickListener(v -> {
+            if (editTextPadrao.getText().toString().length() > 0) {
+                editTextPadrao.setText(editTextPadrao.getText().toString().substring(0, editTextPadrao.getText().toString().length() - 1));
             }
         });
 
     }
 
     public void onBackPressed() {
+        Intent it;
         if (pcaContext.getVerTela() == 1) {
-            Intent it = new Intent(KilometragemActivity.this, ListaOcorAtendActivity.class);
-            startActivity(it);
-            finish();
+            it = new Intent(KilometragemActivity.this, ListaOcorAtendActivity.class);
         } else {
-            Intent it = new Intent(KilometragemActivity.this, ListaInformacaoActivity.class);
-            startActivity(it);
-            finish();
+            it = new Intent(KilometragemActivity.this, ListaInforActivity.class);
         }
+        startActivity(it);
+        finish();
     }
 
 }

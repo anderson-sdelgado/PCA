@@ -17,6 +17,8 @@ public class CirculacaoBean extends Entidade {
     @DatabaseField
     private String dthrSaidaCirculacao;
     @DatabaseField
+    private Long dthrLongSaidaCirculacao;
+    @DatabaseField
     private String dthrRetornoCirculacao;
     @DatabaseField
     private Long matricMotoristaCirculacao;
@@ -142,5 +144,13 @@ public class CirculacaoBean extends Entidade {
 
     public void setStatusCirculacao(Long statusCirculacao) {
         this.statusCirculacao = statusCirculacao;
+    }
+
+    public Long getDthrLongSaidaCirculacao() {
+        return dthrLongSaidaCirculacao;
+    }
+
+    public void setDthrLongSaidaCirculacao(Long dthrLongSaidaCirculacao) {
+        this.dthrLongSaidaCirculacao = dthrLongSaidaCirculacao;
     }
 }

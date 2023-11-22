@@ -21,44 +21,34 @@ public class SenhaActivity extends ActivityGeneric {
 
         pcaContext = (PCAContext) getApplication();
 
-        editTextSenha = (EditText)  findViewById(R.id.editTextSenha);
-        Button buttonOkSenha =  (Button) findViewById(R.id.buttonOkSenha);
-        Button butttonCancSenha = (Button) findViewById(R.id.buttonCancSenha);
+        editTextSenha = findViewById(R.id.editTextSenha);
+        Button buttonOkSenha =  findViewById(R.id.buttonOkSenha);
+        Button butttonCancSenha = findViewById(R.id.buttonCancSenha);
 
-        buttonOkSenha.setOnClickListener(new View.OnClickListener() {
+        buttonOkSenha.setOnClickListener(v -> {
 
-            @SuppressWarnings("unchecked")
-            @Override
-            public void onClick(View v) {
+            if (!pcaContext.getConfigCTR().hasElements()) {
 
-                if (!pcaContext.getConfigCTR().hasElements()) {
+                Intent it = new Intent(SenhaActivity.this, ConfigActivity.class);
+                startActivity(it);
+                finish();
 
+            } else {
+
+                if (pcaContext.getConfigCTR().getConfig(editTextSenha.getText().toString())) {
                     Intent it = new Intent(SenhaActivity.this, ConfigActivity.class);
                     startActivity(it);
                     finish();
-
-                } else {
-
-                    if (pcaContext.getConfigCTR().getConfig(editTextSenha.getText().toString())) {
-                        Intent it = new Intent(SenhaActivity.this, ConfigActivity.class);
-                        startActivity(it);
-                        finish();
-                    }
-
                 }
 
             }
+
         });
 
-        butttonCancSenha.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(SenhaActivity.this, MenuInicialActivity.class);
-                startActivity(it);
-                finish();
-            }
-
+        butttonCancSenha.setOnClickListener(v -> {
+            Intent it = new Intent(SenhaActivity.this, MenuInicialActivity.class);
+            startActivity(it);
+            finish();
         });
 
     }

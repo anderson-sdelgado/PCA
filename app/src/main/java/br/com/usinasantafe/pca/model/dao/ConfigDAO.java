@@ -56,35 +56,4 @@ public class ConfigDAO {
         configBean.commit();
     }
 
-    public AtualAplicBean recAtual(String result) {
-
-        AtualAplicBean atualAplicBean = new AtualAplicBean();
-
-        try {
-
-            JSONObject jObj = new JSONObject(result);
-            JSONArray jsonArray = jObj.getJSONArray("dados");
-
-            if (jsonArray.length() > 0) {
-
-                JSONObject objeto = jsonArray.getJSONObject(0);
-                Gson gson = new Gson();
-                atualAplicBean = gson.fromJson(objeto.toString(), AtualAplicBean.class);
-
-                ConfigBean configBean = getConfig();
-                configBean.setFlagLogEnvio(atualAplicBean.getFlagLogEnvio());
-                configBean.setFlagLogErro(atualAplicBean.getFlagLogErro());
-                configBean.setDthrServConfig(atualAplicBean.getDthr());
-                configBean.update();
-
-            }
-
-        } catch (Exception e) {
-            LogErroDAO.getInstance().insert(e);
-        }
-
-        return atualAplicBean;
-
-    }
-
 }

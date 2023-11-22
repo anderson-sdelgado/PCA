@@ -13,11 +13,11 @@ public class LogErroBean extends Entidade {
     @DatabaseField(generatedId=true)
     private Long idLog;
     @DatabaseField
-    private Long nroAparelho;
-    @DatabaseField
     private String exception;
     @DatabaseField
     private String dthr;
+    @DatabaseField
+    private Long dthrLong;
     @DatabaseField
     private Long status;
 
@@ -30,14 +30,6 @@ public class LogErroBean extends Entidade {
 
     public void setIdLog(Long idLog) {
         this.idLog = idLog;
-    }
-
-    public Long getNroAparelho() {
-        return nroAparelho;
-    }
-
-    public void setNroAparelho(Long nroAparelho) {
-        this.nroAparelho = nroAparelho;
     }
 
     public String getException() {
@@ -62,5 +54,13 @@ public class LogErroBean extends Entidade {
 
     public void setStatus(Long status) {
         this.status = status;
+    }
+
+    public Long getDthrLong() {
+        return dthrLong;
+    }
+
+    public void setDthrLong(Long dthrLong) {
+        this.dthrLong = dthrLong;
     }
 }

@@ -31,10 +31,10 @@ public class ListaLocalSaidaActivity extends ActivityGeneric {
         setContentView(R.layout.activity_lista_local_saida);
 
         pcaContext = (PCAContext) getApplication();
-        Button buttonRetListaLocalSaida = (Button) findViewById(R.id.buttonRetListaLocalSaida);
-        Button buttonAtualListaLocalSaida = (Button) findViewById(R.id.buttonAtualListaLocalSaida);
+        Button buttonRetListaLocalSaida = findViewById(R.id.buttonRetListaLocalSaida);
+        Button buttonAtualListaLocalSaida = findViewById(R.id.buttonAtualListaLocalSaida);
 
-        ArrayList<String> itens = new ArrayList<String>();
+        ArrayList<String> itens = new ArrayList<>();
 
         localSaidaList = pcaContext.getCirculacaoCTR().localSaidaList();
         for(LocalBean localBean : localSaidaList){
@@ -42,88 +42,63 @@ public class ListaLocalSaidaActivity extends ActivityGeneric {
         }
 
         AdapterList adapterList = new AdapterList(this, itens);
-        localSaidaListView = (ListView) findViewById(R.id.listaLocalSaida);
+        localSaidaListView = findViewById(R.id.listaLocalSaida);
         localSaidaListView.setAdapter(adapterList);
 
-        localSaidaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        localSaidaListView.setOnItemClickListener((l, v, position, id) -> {
 
-            @Override
-            public void onItemClick(AdapterView<?> l, View v, int position,
-                                    long id) {
+            LocalBean localBean = localSaidaList.get(position);
+            pcaContext.getCirculacaoCTR().setIdLocalSaidaCirculacao(localBean.getIdLocal());
 
-                LocalBean localBean = localSaidaList.get(position);
-                pcaContext.getCirculacaoCTR().setIdLocalSaidaCirculacao(localBean.getIdLocal());
+            localSaidaList.clear();
 
-                localSaidaList.clear();
-
-                Intent it = new Intent(ListaLocalSaidaActivity.this, ListaLocalDestinoActivity.class);
-                startActivity(it);
-                finish();
-
-            }
+            Intent it = new Intent(ListaLocalSaidaActivity.this, ListaLocalDestinoActivity.class);
+            startActivity(it);
+            finish();
 
         });
 
-        buttonRetListaLocalSaida.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(ListaLocalSaidaActivity.this, ListaAmbulanciaActivity.class);
-                startActivity(it);
-                finish();
-            }
+        buttonRetListaLocalSaida.setOnClickListener(v -> {
+            Intent it = new Intent(ListaLocalSaidaActivity.this, ListaAmbulanciaActivity.class);
+            startActivity(it);
+            finish();
         });
 
-        buttonAtualListaLocalSaida.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        buttonAtualListaLocalSaida.setOnClickListener(v -> {
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder(ListaLocalSaidaActivity.this);
-                alerta.setTitle("ATENÇÃO");
-                alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
-                alerta.setNegativeButton("SIM", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder(ListaLocalSaidaActivity.this);
+            alerta.setTitle("ATENÇÃO");
+            alerta.setMessage("DESEJA REALMENTE ATUALIZAR BASE DE DADOS?");
+            alerta.setNegativeButton("SIM", (dialog, which) -> {
 
-                        ConexaoWeb conexaoWeb = new ConexaoWeb();
+                ConexaoWeb conexaoWeb = new ConexaoWeb();
 
-                        if (conexaoWeb.verificaConexao(ListaLocalSaidaActivity.this)) {
+                if (conexaoWeb.verificaConexao(ListaLocalSaidaActivity.this)) {
 
-                            progressBar = new ProgressDialog(ListaLocalSaidaActivity.this);
-                            progressBar.setCancelable(true);
-                            progressBar.setMessage("ATUALIZNADO LOCAL...");
-                            progressBar.show();
+                    progressBar = new ProgressDialog(ListaLocalSaidaActivity.this);
+                    progressBar.setCancelable(true);
+                    progressBar.setMessage("ATUALIZNADO LOCAL...");
+                    progressBar.show();
 
-                            pcaContext.getCirculacaoCTR().atualDadosLocal(ListaLocalSaidaActivity.this
-                                    , ListaLocalSaidaActivity.class, progressBar);
+                    pcaContext.getCirculacaoCTR().atualDadosLocal(ListaLocalSaidaActivity.this
+                            , ListaLocalSaidaActivity.class, progressBar);
 
-                        } else {
+                } else {
 
-                            AlertDialog.Builder alerta = new AlertDialog.Builder(ListaLocalSaidaActivity.this);
-                            alerta.setTitle("ATENÇÃO");
-                            alerta.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
-                            alerta.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                    AlertDialog.Builder alerta1 = new AlertDialog.Builder(ListaLocalSaidaActivity.this);
+                    alerta1.setTitle("ATENÇÃO");
+                    alerta1.setMessage("FALHA NA CONEXÃO DE DADOS. O CELULAR ESTA SEM SINAL. POR FAVOR, TENTE NOVAMENTE QUANDO O CELULAR ESTIVE COM SINAL.");
+                    alerta1.setPositiveButton("OK", (dialog1, which1) -> {});
 
-                                }
-                            });
+                    alerta1.show();
 
-                            alerta.show();
+                }
 
-                        }
+            });
 
-                    }
-                });
+            alerta.setPositiveButton("NÃO", (dialog, which) -> {});
+            alerta.show();
 
-                alerta.setPositiveButton("NÃO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-
-                alerta.show();
-
-            }
         });
 
     }
