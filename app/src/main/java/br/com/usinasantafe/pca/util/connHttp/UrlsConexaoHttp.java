@@ -7,7 +7,7 @@ public class UrlsConexaoHttp {
     public static String versao = "versao_" + PCAContext.versaoWS.replace(".", "_");
 
     public static String url = "https://www.usinasantafe.com.br/pcadev/view/";
-//	public static String url = "https://www.usinasantafe.com.br/pcaqa/view/";
+//    public static String url = "https://www.usinasantafe.com.br/pcaqa/view/";
 //    public static String url = "https://www.usinasantafe.com.br/pcaprod/" + versao + "/view/";
 
     public static String localPSTEstatica = "br.com.usinasantafe.pca.model.bean.estaticas.";

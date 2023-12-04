@@ -198,7 +198,6 @@ public class AtualDadosServ {
 
 	}
 
-
 	public void atualTodasTabBD(Context telaAtual, Class telaProx, ProgressDialog progressDialog){
 
 		try {
@@ -216,7 +215,6 @@ public class AtualDadosServ {
 		}
 
 	}
-
 
 	public void allClasses(){
 
