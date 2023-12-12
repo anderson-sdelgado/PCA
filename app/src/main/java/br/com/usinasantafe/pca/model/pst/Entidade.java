@@ -277,4 +277,31 @@ public abstract class Entidade implements Serializable {
 		this.daoImpl().clearObjectCache();
 		dao = null;
 	}
+
+	public void deleteGet(ArrayList<EspecificaPesquisa> pesquisaArrayList)  {
+		try {
+			DeleteBuilder<String, Object> deleteBuilder = this.daoImpl().deleteBuilder();
+			Where<String, Object> where = deleteBuilder.where();
+			EspecificaPesquisa pesquisa = pesquisaArrayList.get(0);
+			if(pesquisa.getTipo() == 1) {
+				where.le(pesquisa.getCampo(), pesquisa.getValor());
+			}else {
+				where.ge(pesquisa.getCampo(), pesquisa.getValor());
+			}
+			for(int i = 1; i < pesquisaArrayList.size(); i++){
+				pesquisa = pesquisaArrayList.get(i);
+				where.and();
+				if(pesquisa.getTipo() == 1) {
+					where.le(pesquisa.getCampo(), pesquisa.getValor());
+				}else {
+					where.ge(pesquisa.getCampo(), pesquisa.getValor());
+				}
+			}
+			deleteBuilder.delete();
+		} catch (SQLException e) {
+			LogErroDAO.getInstance().insertLogErro(e);
+			throw new RuntimeException(e);
+		}
+	}
+
 }

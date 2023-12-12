@@ -9,32 +9,32 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".view.ListaInforActivity">
+    tools:context=".view.ListaEquipActivity">
 
     <TextView
-        android:id="@+id/textViewListaInfo"
+        android:id="@+id/textViewListaAmbul"
         style="@style/TextViewTituloLista"
-        android:text="@string/texto_informacao" />
+        android:text="@string/texto_ambulancias" />
 
     <ListView
-        android:id="@+id/listaViewInfo"
+        android:id="@+id/listaViewAmbul"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         />
 
     <Button
-        android:id="@+id/buttonFinalizarViagem"
+        android:id="@+id/buttonRetListaAmbul"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_finalizar_viagem" />
+        android:text="@string/texto_padrao_retornar" />
 
     <Button
-        android:id="@+id/buttonCancViagem"
+        android:id="@+id/buttonAtualListaAmbul"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_canc_viagem" />
+        android:text="@string/texto_atualizar_bd" />
 
 </LinearLayout>

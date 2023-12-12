@@ -7,10 +7,12 @@ import android.util.Log;
 
 import java.util.List;
 
-import br.com.usinasantafe.pca.model.bean.variaveis.CirculacaoBean;
+import br.com.usinasantafe.pca.model.bean.variaveis.ViagemBean;
 import br.com.usinasantafe.pca.model.pst.DatabaseHelper;
+import br.com.usinasantafe.pca.util.ConnectNetwork;
 import br.com.usinasantafe.pca.util.EnvioDadosServ;
 import br.com.usinasantafe.pca.util.Tempo;
+import br.com.usinasantafe.pca.view.ActivityGeneric;
 
 public class NetworkChangeListerner extends BroadcastReceiver {
 
@@ -22,31 +24,37 @@ public class NetworkChangeListerner extends BroadcastReceiver {
 		}
 
 		Log.i("PCO", "DATA HORA = " + Tempo.getInstance().dthrAtualString());
-		EnvioDadosServ.getInstance().envioDados(context);
-		dados();
+		if(ConnectNetwork.isConnected(context)){
+			ActivityGeneric.connectNetwork = true;
+			EnvioDadosServ.getInstance().envioDados();
+		} else {
+			ActivityGeneric.connectNetwork = false;
+		}
+
+//		dados();
 
 	}
 
 	public void dados(){
 
-		CirculacaoBean circulacaoBean = new CirculacaoBean();
-		List<CirculacaoBean> circulacaoList = circulacaoBean.all();
+		ViagemBean viagemBean = new ViagemBean();
+		List<ViagemBean> viagemList = viagemBean.all();
 
-		for(CirculacaoBean circulacaoBeanBD : circulacaoList){
-			Log.i("PCA", "CIRCULACAO");
-			Log.i("PCA", "idCirculacao = " + circulacaoBeanBD.getIdCirculacao());
-			Log.i("PCA", "nroAparelhoCirculacao = " + circulacaoBeanBD.getNroAparelhoCirculacao());
-			Log.i("PCA", "dthrSaidaCirculacao = " + circulacaoBeanBD.getDthrSaidaCirculacao());
-			Log.i("PCA", "dthrRetornoCirculacao = " + circulacaoBeanBD.getDthrRetornoCirculacao());
-			Log.i("PCA", "matricMotoristaCirculacao = " + circulacaoBeanBD.getMatricMotoristaCirculacao());
-			Log.i("PCA", "matricPacienteCirculacao = " + circulacaoBeanBD.getMatricPacienteCirculacao());
-			Log.i("PCA", "idEquipCirculacao = " + circulacaoBeanBD.getIdEquipCirculacao());
-			Log.i("PCA", "kmSaidaCirculacao = " + circulacaoBeanBD.getKmSaidaCirculacao());
-			Log.i("PCA", "kmRetornoCirculacao = " + circulacaoBeanBD.getKmRetornoCirculacao());
-			Log.i("PCA", "idLocalSaidaCirculacao = " + circulacaoBeanBD.getIdLocalSaidaCirculacao());
-			Log.i("PCA", "idLocalDestinoCirculacao = " + circulacaoBeanBD.getIdLocalDestinoCirculacao());
-			Log.i("PCA", "idOcorAtendCirculacao = " + circulacaoBeanBD.getIdOcorAtendCirculacao());
-			Log.i("PCA", "statusCirculacao = " + circulacaoBeanBD.getStatusCirculacao());
+		for(ViagemBean viagemBeanBD :viagemList){
+			Log.i("PCA", "Viagem");
+			Log.i("PCA", "idViagem = " + viagemBeanBD.getIdViagem());
+			Log.i("PCA", "nroAparelhoViagem = " + viagemBeanBD.getNroAparelhoViagem());
+			Log.i("PCA", "dthrSaidaViagem = " + viagemBeanBD.getDthrSaidaViagem());
+			Log.i("PCA", "dthrRetornoViagem = " + viagemBeanBD.getDthrChegadaViagem());
+			Log.i("PCA", "matricMotoristaViagem = " + viagemBeanBD.getMatricMotoristaViagem());
+			Log.i("PCA", "matricPacienteViagem = " + viagemBeanBD.getMatricPacienteViagem());
+			Log.i("PCA", "idEquipViagem = " + viagemBeanBD.getIdEquipViagem());
+			Log.i("PCA", "kmSaidaViagem = " + viagemBeanBD.getKmSaidaViagem());
+			Log.i("PCA", "kmRetornoViagem = " + viagemBeanBD.getKmChegadaViagem());
+			Log.i("PCA", "idLocalSaidaViagem = " + viagemBeanBD.getIdLocalSaidaViagem());
+			Log.i("PCA", "idLocalDestinoViagem = " + viagemBeanBD.getIdLocalDestinoViagem());
+			Log.i("PCA", "idOcorAtendViagem = " + viagemBeanBD.getIdOcorAtendViagem());
+			Log.i("PCA", "statusViagem = " + viagemBeanBD.getStatusViagem());
 		}
 
 	}

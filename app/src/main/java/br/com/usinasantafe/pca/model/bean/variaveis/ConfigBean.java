@@ -19,9 +19,11 @@ public class ConfigBean extends Entidade {
     @DatabaseField
     private String dthrServConfig;
     @DatabaseField
-    private Long flagLogEnvio;
+    private Long matricMotorista;
     @DatabaseField
-    private Long flagLogErro;
+    private Long idEquip;
+    @DatabaseField
+    private Long statusAplic; // 0 - Fechado; 1 -Aberto
 
     public ConfigBean() {
     }
@@ -50,27 +52,35 @@ public class ConfigBean extends Entidade {
         this.senhaConfig = senhaConfig;
     }
 
-    public Long getFlagLogEnvio() {
-        return flagLogEnvio;
-    }
-
-    public void setFlagLogEnvio(Long flagLogEnvio) {
-        this.flagLogEnvio = flagLogEnvio;
-    }
-
-    public Long getFlagLogErro() {
-        return flagLogErro;
-    }
-
-    public void setFlagLogErro(Long flagLogErro) {
-        this.flagLogErro = flagLogErro;
-    }
-
     public String getDthrServConfig() {
         return dthrServConfig;
     }
 
     public void setDthrServConfig(String dthrServConfig) {
         this.dthrServConfig = dthrServConfig;
+    }
+
+    public Long getMatricMotorista() {
+        return matricMotorista;
+    }
+
+    public void setMatricMotorista(Long matricMotorista) {
+        this.matricMotorista = matricMotorista;
+    }
+
+    public Long getIdEquip() {
+        return idEquip;
+    }
+
+    public void setIdEquip(Long idEquip) {
+        this.idEquip = idEquip;
+    }
+
+    public Long getStatusAplic() {
+        return statusAplic;
+    }
+
+    public void setStatusAplic(Long statusAplic) {
+        this.statusAplic = statusAplic;
     }
 }

@@ -11,6 +11,7 @@ import br.com.usinasantafe.pca.model.bean.variaveis.ConfigBean;
 import br.com.usinasantafe.pca.model.dao.AtualAplicDAO;
 import br.com.usinasantafe.pca.model.dao.ConfigDAO;
 import br.com.usinasantafe.pca.model.dao.LogErroDAO;
+import br.com.usinasantafe.pca.model.dao.LogProcessoDAO;
 import br.com.usinasantafe.pca.util.AtualDadosServ;
 import br.com.usinasantafe.pca.util.VerifDadosServ;
 
@@ -34,6 +35,11 @@ public class ConfigCTR {
         return configDAO.getConfig(senha);
     }
 
+    public Long getStatusConfig(){
+        ConfigDAO configDAO = new ConfigDAO();
+        return configDAO.getStatusConfig();
+    }
+
     public void atualTodasTabelas(Context tela, ProgressDialog progressDialog){
         AtualDadosServ.getInstance().atualTodasTabBD(tela, progressDialog);
     }
@@ -41,6 +47,21 @@ public class ConfigCTR {
     public void salvarConfig(Long nroAparelho, String senha){
         ConfigDAO configDAO = new ConfigDAO();
         configDAO.salvarConfig(nroAparelho, senha);
+    }
+
+    public void setMatricUsuario(Long matricUsuario) {
+        ConfigDAO configDAO = new ConfigDAO();
+        configDAO.setMatricUsuario(matricUsuario);
+    }
+
+    public void setIdEquip(Long idEquip){
+        ConfigDAO configDAO = new ConfigDAO();
+        configDAO.setIdEquip(idEquip);
+    }
+
+    public void setStatusAplicFechado(){
+        ConfigDAO configDAO = new ConfigDAO();
+        configDAO.setStatusAplicFechado();
     }
 
     public void salvarToken(String senha, String versao, Long nroAparelho, Context telaAtual, Class telaProx, ProgressDialog progressDialog){
@@ -81,9 +102,14 @@ public class ConfigCTR {
         }
     }
 
-    public void deleteLogs(){
+    public void deleteLogErro(){
         LogErroDAO logErroDAO = new LogErroDAO();
         logErroDAO.deleteLogErro();
+    }
+
+    public void deleteLogProcesso(){
+        LogProcessoDAO logProcessoDAO = new LogProcessoDAO();
+        logProcessoDAO.deleteLogProcesso();
     }
 
 }

@@ -13,7 +13,8 @@ import br.com.usinasantafe.pca.model.bean.estaticas.EquipBean;
 import br.com.usinasantafe.pca.model.bean.estaticas.LocalBean;
 import br.com.usinasantafe.pca.model.bean.estaticas.OcorAtendBean;
 import br.com.usinasantafe.pca.model.bean.variaveis.ConfigBean;
-import br.com.usinasantafe.pca.model.bean.variaveis.CirculacaoBean;
+import br.com.usinasantafe.pca.model.bean.variaveis.ViagemBean;
+import br.com.usinasantafe.pca.model.bean.variaveis.LogProcessoBean;
 import br.com.usinasantafe.pca.model.dao.LogErroDAO;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
@@ -53,8 +54,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(cs, OcorAtendBean.class);
 
 			TableUtils.createTable(cs, ConfigBean.class);
-			TableUtils.createTable(cs, CirculacaoBean.class);
+			TableUtils.createTable(cs, ViagemBean.class);
 			TableUtils.createTable(cs, LogErroBean.class);
+			TableUtils.createTable(cs, LogProcessoBean.class);
 
 		}
 		catch(Exception e){

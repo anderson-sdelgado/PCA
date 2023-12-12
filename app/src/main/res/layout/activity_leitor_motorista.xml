@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,20 +10,23 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".view.LeitorColabActivity">
+    tools:context=".view.LeitorMotoristaActivity">
 
     <TextView
-        android:id="@+id/txtTituloColab"
+        android:id="@+id/txtTituloUsu"
         style="@style/TextViewTituloLista"
-        android:text="@string/texto_colab" />
+        android:text="@string/texto_motorista" />
 
     <TextView
-        android:id="@+id/txtRetColab"
-        style="@style/TextView"
+        android:id="@+id/txtRetUsu"
+        style="@style/TextViewCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="@string/texto_usu_matric" />
 
     <Button
-        android:id="@+id/buttonCaptColab"
+        android:id="@+id/buttonCaptMatric"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +38,7 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/buttonOkColab"
+            android:id="@+id/buttonOkDataHora"
             style="@style/BotaoAvulso"
             android:layout_weight="1"
             android:layout_width="fill_parent"
@@ -42,7 +46,7 @@
             android:text="@string/texto_padrao_ok" />
 
         <Button
-            android:id="@+id/buttonCancColab"
+            android:id="@+id/buttonCancUsu"
             style="@style/BotaoAvulso"
             android:layout_weight="1"
             android:layout_width="fill_parent"
@@ -59,7 +63,7 @@
         android:text="@string/texto_atualizar_bd" />
 
     <Button
-        android:id="@+id/buttonDigColab"
+        android:id="@+id/buttonDigUsu"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

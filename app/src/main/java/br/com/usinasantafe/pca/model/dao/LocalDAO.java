@@ -9,14 +9,9 @@ public class LocalDAO {
     public LocalDAO() {
     }
 
-    public List<LocalBean> localSaidaList(){
+    public List<LocalBean> localList(){
         LocalBean localBean = new LocalBean();
-        return localBean.getAndOrderBy("flagSaidaLocal", 1L, "descrLocal", true);
-    }
-
-    public List<LocalBean> localDestinoList(){
-        LocalBean localBean = new LocalBean();
-        return localBean.getAndOrderBy("flagDestinoLocal", 1L, "descrLocal", true);
+        return localBean.orderBy("descrLocal", true);
     }
 
     public LocalBean getLocal(Long idLocal){

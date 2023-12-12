@@ -5,7 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import br.com.usinasantafe.pca.model.pst.Entidade;
 
-@DatabaseTable(tableName="tblogvar")
+@DatabaseTable(tableName="tblogerrovar")
 public class LogErroBean extends Entidade {
 
     private static final long serialVersionUID = 1L;

@@ -33,7 +33,6 @@ public class ActivityGeneric extends OrmLiteBaseActivity<DatabaseHelper> {
 
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(networkChangeListerner, intentFilter);
-
     }
 
     @Override
@@ -128,8 +127,7 @@ public class ActivityGeneric extends OrmLiteBaseActivity<DatabaseHelper> {
                 if(!texto.contains(",")){
                     editTextPadrao.setText(editTextPadrao.getText() + "" + numBotao);
                 }
-            }
-            else{
+            } else {
                 editTextPadrao.setText(editTextPadrao.getText() + "" + numBotao);
             }
 

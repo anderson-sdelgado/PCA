@@ -24,6 +24,13 @@
         />
 
     <Button
+        android:id="@+id/buttonAvancarListaLocalSaida"
+        style="@style/BotaoAvulso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/texto_padrao_avancar" />
+
+    <Button
         android:id="@+id/buttonRetListaLocalSaida"
         style="@style/BotaoAvulso"
         android:layout_width="match_parent"

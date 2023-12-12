@@ -1,7 +1,5 @@
 package br.com.usinasantafe.pca.view;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,12 +9,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import br.com.usinasantafe.pca.BuildConfig;
 import br.com.usinasantafe.pca.PCAContext;
 import br.com.usinasantafe.pca.R;
-import br.com.usinasantafe.pca.NetworkChangeListerner;
+import br.com.usinasantafe.pca.model.dao.LogProcessoDAO;
 import br.com.usinasantafe.pca.util.EnvioDadosServ;
 
 public class MenuInicialActivity extends ActivityGeneric {
@@ -44,34 +41,41 @@ public class MenuInicialActivity extends ActivityGeneric {
 
         progressBar = new ProgressDialog(this);
 
-        if(pcaContext.getCirculacaoCTR().verCirculacaoAberta()){
-            Intent it = new Intent(MenuInicialActivity.this, ListaInforActivity.class);
-            startActivity(it);
-            finish();
-        }
-
+        LogProcessoDAO.getInstance().insertLogProcesso("ArrayList<String> itens = new ArrayList<>();\n" +
+                "        itens.add(\"INICIAR CIRCULAÇÃO\");\n" +
+                "        itens.add(\"CONFIGURAÇÃO\");\n" +
+                "        itens.add(\"SAIR\");\n" +
+                "        AdapterList adapterList = new AdapterList(this, itens);\n" +
+                "        menuInicialListView = findViewById(R.id.listaMenuInicial);\n" +
+                "        menuInicialListView.setAdapter(adapterList);", getLocalClassName());
         ArrayList<String> itens = new ArrayList<>();
 
-        itens.add("INICIAR CIRCULAÇÃO");
+        itens.add("INICIAR MOVIMENTAÇÕES");
         itens.add("CONFIGURAÇÃO");
         itens.add("SAIR");
 
         AdapterList adapterList = new AdapterList(this, itens);
         menuInicialListView = findViewById(R.id.listaMenuInicial);
         menuInicialListView.setAdapter(adapterList);
-
         menuInicialListView.setOnItemClickListener((l, v, position, id) -> {
 
+            LogProcessoDAO.getInstance().insertLogProcesso("menuInicialListView.setOnItemClickListener((l, v, position, id) -> {\n" +
+                    "            TextView textView = v.findViewById(R.id.textViewItemList);\n" +
+                    "            String text = textView.getText().toString();", getLocalClassName());
             TextView textView = v.findViewById(R.id.textViewItemList);
             String text = textView.getText().toString();
+            if (text.equals("INICIAR MOVIMENTAÇÕES")) {
 
-            if (text.equals("INICIAR CIRCULAÇÃO")) {
-
-                if (pcaContext.getCirculacaoCTR().hasElementsColab()
+                LogProcessoDAO.getInstance().insertLogProcesso("if (text.equals(\"INICIAR CIRCULAÇÃO\")) {", getLocalClassName());
+                if (pcaContext.getViagemCTR().hasElementsColab()
                         && pcaContext.getConfigCTR().hasElements()) {
 
+                    LogProcessoDAO.getInstance().insertLogProcesso("if (pcaContext.getCirculacaoCTR().hasElementsColab()\n" +
+                            "                        && pcaContext.getConfigCTR().hasElements()) {\n" +
+                            "                    pcaContext.setVerTela(1);\n" +
+                            "                    Intent it = new Intent(MenuInicialActivity.this, LeitorUsuarioActivity.class);", getLocalClassName());
                     pcaContext.setVerTela(1);
-                    Intent it = new Intent(MenuInicialActivity.this, LeitorUsuarioActivity.class);
+                    Intent it = new Intent(MenuInicialActivity.this, LeitorMotoristaActivity.class);
                     startActivity(it);
                     finish();
 
@@ -79,12 +83,19 @@ public class MenuInicialActivity extends ActivityGeneric {
 
             } else if (text.equals("CONFIGURAÇÃO")) {
 
+                LogProcessoDAO.getInstance().insertLogProcesso("} else if (text.equals(\"CONFIGURAÇÃO\")) {\n" +
+                        "                Intent it = new Intent(MenuInicialActivity.this, SenhaActivity.class);", getLocalClassName());
                 Intent it = new Intent(MenuInicialActivity.this, SenhaActivity.class);
                 startActivity(it);
                 finish();
 
             } else if (text.equals("SAIR")) {
 
+                LogProcessoDAO.getInstance().insertLogProcesso("} else if (text.equals(\"SAIR\")) {\n" +
+                        "                Intent intent = new Intent(Intent.ACTION_MAIN);\n" +
+                        "                intent.addCategory(Intent.CATEGORY_HOME);\n" +
+                        "                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);\n" +
+                        "                startActivity(intent);", getLocalClassName());
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_HOME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -22,7 +22,7 @@ public class UrlsConexaoHttp {
     }
 
     public String getsInserirCirculacao() {
-        return url + "inserircirculacao.php";
+        return url + "inserirviagem.php";
     }
 
     public String urlVerifica(String classe) {

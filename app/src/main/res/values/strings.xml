@@ -163,7 +163,7 @@
     <string name="texto_atualizar_bd">ATUALIZAR DADOS</string>
     <string name="texto_menu_principal">PRINCIPAL - V 1.00</string>
     <string name="texto_item_list">TESTE</string>
-    <string name="texto_usuario">MATRIC. USUÁRIO</string>
+    <string name="texto_motorista">MATRIC. MOTORISTA</string>
     <string name="texto_colab">MATRIC. COLABORADOR</string>
     <string name="texto_usu_matric">19759</string>
     <string name="texto_pega_matric">CAPTURAR MATRICULA</string>
@@ -175,8 +175,21 @@
     <string name="texto_local_destino">LOCAL DESTINO</string>
     <string name="texto_local_saida">LOCAL SAÍDA</string>
     <string name="texto_ocor_atend">OCORRÊNCIAS DE ATENDIMENTO</string>
-    <string name="texto_informacao">INFORMAÇÕES</string>
+    <string name="texto_detalhe">DETALHES</string>
     <string name="texto_canc_viagem">CANCELAR VIAGEM</string>
     <string name="texto_finalizar_viagem">FINALIZAR VIAGEM</string>
     <string name="texto_inicio">INICIANDO O APLICATIVO...</string>
+    <string name="texto_menu_usuario">USUÁRIO: </string>
+    <string name="texto_menu_equip">EQUIPAMENTO: </string>
+    <string name="texto_titulo_viagem">VIAGEM(NS)</string>
+    <string name="texto_inserir">INSERIR VIAGEM</string>
+    <string name="texto_finalizar">FINALIZAR VIAGEM(NS)</string>
+    <string name="texto_padrao_fechar">FECHAR</string>
+    <string name="texto_titulo_local_saida">LOCAL DE SAÍDA</string>
+    <string name="texto_titulo_local_destino">LOCAL DE DESTINO</string>
+    <string name="texto_padrao_avancar">AVANÇAR</string>
+    <string name="texto_titulo_data">DATA</string>
+    <string name="texto_titulo_hora">HORA</string>
+    <string name="texto_selec_data">SELECIONAR DATA</string>
+    <string name="texto_selec_hora">SELECIONAR HORA</string>
 </resources>

@@ -10,19 +10,23 @@ import br.com.usinasantafe.pca.model.bean.estaticas.ColabBean;
 import br.com.usinasantafe.pca.model.bean.estaticas.EquipBean;
 import br.com.usinasantafe.pca.model.bean.estaticas.LocalBean;
 import br.com.usinasantafe.pca.model.bean.estaticas.OcorAtendBean;
-import br.com.usinasantafe.pca.model.bean.variaveis.CirculacaoBean;
-import br.com.usinasantafe.pca.model.dao.CirculacaoDAO;
+import br.com.usinasantafe.pca.model.bean.variaveis.ViagemBean;
+import br.com.usinasantafe.pca.model.dao.ConfigDAO;
+import br.com.usinasantafe.pca.model.dao.ViagemDAO;
 import br.com.usinasantafe.pca.model.dao.ColabDAO;
 import br.com.usinasantafe.pca.model.dao.EquipDAO;
 import br.com.usinasantafe.pca.model.dao.LocalDAO;
 import br.com.usinasantafe.pca.model.dao.OcorAtendDAO;
 import br.com.usinasantafe.pca.util.AtualDadosServ;
+import br.com.usinasantafe.pca.util.EnvioDadosServ;
 
-public class CirculacaoCTR {
+public class ViagemCTR {
 
-    private CirculacaoDAO circulacaoDAO;
+    private Long idLocalDestino;
+    private Long idViagemSelecinado;
+    private int tipoSelecionado; // 1 - Saída; 2 - Retorno;
 
-    public CirculacaoCTR() {
+    public ViagemCTR() {
     }
 
     ///////////////////////////////// VERIFICAR DADOS ////////////////////////////////////////////
@@ -37,48 +41,114 @@ public class CirculacaoCTR {
         return colabDAO.verColab(matricColab);
     }
 
-    public boolean verCirculacaoAberta(){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
-        return circulacaoDAO.verCirculacaoAberta();
-    }
-
-    public boolean verCirculacaoNEnviado(){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
-        return circulacaoDAO.verCirculacaoNEnviado();
+    public boolean verViagemFechada(){
+        ViagemDAO viagemDAO = new ViagemDAO();
+        return viagemDAO.verViagemFechada();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////// SALVAR/ATUALIZAR/EXCLUIR DADOS /////////////////////////////////
 
-    public void criarCirculacao(Long matricUsuario){
-        circulacaoDAO = new CirculacaoDAO();
-        ConfigCTR configCTR = new ConfigCTR();
-        circulacaoDAO.criarCirculacao(matricUsuario, configCTR.getConfig().getNroAparelhoConfig());
+    public void fecharViagem(){
+        ViagemDAO viagemDAO = new ViagemDAO();
+        viagemDAO.fecharViagem(idViagemSelecinado);
+
+        EnvioDadosServ.getInstance().envioDados();
     }
 
-    public void delCircAberto(){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
-        circulacaoDAO.delCircAberto();
+    public void fecharViagemAberta(){
+        ViagemDAO viagemDAO = new ViagemDAO();
+        viagemDAO.fecharViagem();
+
+        ConfigCTR configCTR = new ConfigCTR();
+        configCTR.setStatusAplicFechado();
+
+        EnvioDadosServ.getInstance().envioDados();
+    }
+
+    public void excluirViagem(){
+        ViagemDAO viagemDAO = new ViagemDAO();
+        viagemDAO.excluirViagem(idViagemSelecinado);
     }
 
     public void updatePassageiro(String retorno) {
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
-        circulacaoDAO.updateCirculacao(retorno);
+        ViagemDAO viagemDAO = new ViagemDAO();
+        viagemDAO.updateViagem(retorno);
     }
 
-    public void delCircEnviado(){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
-        circulacaoDAO.delCircEnviado();
+    public void excluirViagemEnviada(){
+        ViagemDAO viagemDAO = new ViagemDAO();
+        viagemDAO.excluirViagemEnviada();
+    }
+
+    public void setIdViagemSelecionado(Long idCircSelect) {
+        this.idViagemSelecinado = idCircSelect;
+    }
+
+    public void setIdLocalDestino(Long idLocalDestino, int tipo) {
+        if(tipo == 1){
+            this.idLocalDestino = idLocalDestino;
+        } else {
+            ViagemDAO viagemDAO = new ViagemDAO();
+            viagemDAO.setIdLocalDestinoViagem(idLocalDestino, idViagemSelecinado);
+        }
+    }
+
+    public void setIdLocalSaida(Long idLocalSaida, int tipo) {
+        ViagemDAO viagemDAO = new ViagemDAO();
+        if(tipo == 1){
+            ConfigCTR configCTR = new ConfigCTR();
+            viagemDAO.abrirViagem(this.idLocalDestino, idLocalSaida, configCTR.getConfig().getMatricMotorista(), configCTR.getConfig().getIdEquip(), configCTR.getConfig().getNroAparelhoConfig());
+        } else {
+            viagemDAO.setIdLocalSaidaViagem(idLocalDestino, idViagemSelecinado);
+        }
+    }
+
+    public void setTipoSelecionado(int tipoSelecionado) {
+        this.tipoSelecionado = tipoSelecionado;
+    }
+
+    public void setDthrViagem(String dthr){
+        ViagemDAO viagemDAO = new ViagemDAO();
+        if(this.tipoSelecionado == 1){
+            viagemDAO.setDthrSaida(dthr, idViagemSelecinado);
+        } else {
+            viagemDAO.setDthrRetorno(dthr, idViagemSelecinado);
+        }
+    }
+
+    public void setMatricPacienteViagem(Long matricPaciente){
+        ViagemDAO viagemDAO = new ViagemDAO();
+        viagemDAO.setMatricPacienteViagem(matricPaciente, idViagemSelecinado);
+    }
+
+    public void setKilometragemViagem(Double kilometragem){
+        ViagemDAO viagemDAO = new ViagemDAO();
+        if(this.tipoSelecionado == 1){
+            viagemDAO.setKmSaidaViagem(kilometragem, idViagemSelecinado);
+        } else {
+            viagemDAO.setKmChegadaViagem(kilometragem, idViagemSelecinado);
+        }
+    }
+
+    public void setIdOcorAtendViagem(Long idOcor){
+        ViagemDAO viagemDAO = new ViagemDAO();
+        viagemDAO.setIdOcorAtendViagem(idOcor, idViagemSelecinado);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////////////// GET DADOS ////////////////////////////////////////////
 
-    public CirculacaoBean getCirculacaoAberta(){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
-        return circulacaoDAO.getCirculacaoAberta();
+    public ViagemBean getViagem(){
+        ViagemDAO viagemDAO = new ViagemDAO();
+        return viagemDAO.getViagemId(idViagemSelecinado);
+    }
+
+    public List<ViagemBean> viagemAbertaList(){
+        ViagemDAO viagemDAO = new ViagemDAO();
+        return viagemDAO.viagemAbertoList();
     }
 
     public ColabBean getColab(Long matricColab){
@@ -101,19 +171,18 @@ public class CirculacaoCTR {
         return ocorAtendDAO.getOcorAtend(idOcorAtend);
     }
 
+    public int getTipoSelecionado() {
+        return tipoSelecionado;
+    }
+
     public List<EquipBean> equipList(){
         EquipDAO equipDAO = new EquipDAO();
         return equipDAO.equipList();
     }
 
-    public List<LocalBean> localSaidaList(){
+    public List<LocalBean> localList(){
         LocalDAO localDAO = new LocalDAO();
-        return localDAO.localSaidaList();
-    }
-
-    public List<LocalBean> localDestinoList(){
-        LocalDAO localDAO = new LocalDAO();
-        return localDAO.localDestinoList();
+        return localDAO.localList();
     }
 
     public List<OcorAtendBean> ocorAtendList(){
@@ -122,41 +191,8 @@ public class CirculacaoCTR {
     }
 
     public String dadosEnvio(){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
-        return circulacaoDAO.dadosEnvio();
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////// SET DADOS ////////////////////////////////////////////
-
-    public void setMatricPacienteCirculacao(Long matricPaciente){
-        circulacaoDAO.setMatricPacienteCirculacao(matricPaciente);
-    }
-
-    public void setIdEquipCirculacao(Long idEquip){
-        circulacaoDAO.setIdEquipCirculacao(idEquip);
-    }
-
-    public void setIdLocalSaidaCirculacao(Long idLocalSaida){
-        circulacaoDAO.setIdLocalSaidaCirculacao(idLocalSaida);
-    }
-
-    public void setIdLocalDestinoCirculacao(Long idLocalDestino){
-        circulacaoDAO.setIdLocalDestinoCirculacao(idLocalDestino);
-    }
-
-    public void setIdOcorAtendCirculacao(Long idOcorAtend){
-        circulacaoDAO.setIdOcorAtendCirculacao(idOcorAtend);
-    }
-
-    public void setKmSaidaCirculacao(Double kmSaida){
-        circulacaoDAO.setKmSaidaCirculacao(kmSaida);
-    }
-
-    public void setKmRetornoCirculacao(Double kmRetorno){
-        CirculacaoDAO circulacaoDAO = new CirculacaoDAO();
-        circulacaoDAO.setKmRetornoCirculacao(kmRetorno);
+        ViagemDAO viagemDAO = new ViagemDAO();
+        return viagemDAO.dadosEnvio();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////

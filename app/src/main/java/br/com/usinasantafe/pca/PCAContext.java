@@ -3,7 +3,7 @@ package br.com.usinasantafe.pca;
 import android.app.Application;
 
 import br.com.usinasantafe.pca.control.ConfigCTR;
-import br.com.usinasantafe.pca.control.CirculacaoCTR;
+import br.com.usinasantafe.pca.control.ViagemCTR;
 import br.com.usinasantafe.pca.model.dao.LogErroDAO;
 
 public class PCAContext extends Application {
@@ -12,21 +12,19 @@ public class PCAContext extends Application {
 
     public static String versaoWS = "2.00";
 
-    private CirculacaoCTR circulacaoCTR;
+    private ViagemCTR viagemCTR;
     private ConfigCTR configCTR;
-    private int verTela;
-    // 1 - Kilometragem Inicial
-    // 2 - Kilometragem Final
+    private int verTela; // 1 - Inserir Viagem; 2 - Atualizar Viagem
 
     @Override
     public void onCreate() {
         super.onCreate();
     }
 
-    public CirculacaoCTR getCirculacaoCTR() {
-        if (circulacaoCTR == null)
-            circulacaoCTR = new CirculacaoCTR();
-        return circulacaoCTR;
+    public ViagemCTR getViagemCTR() {
+        if (viagemCTR == null)
+            viagemCTR = new ViagemCTR();
+        return viagemCTR;
     }
 
     public ConfigCTR getConfigCTR() {

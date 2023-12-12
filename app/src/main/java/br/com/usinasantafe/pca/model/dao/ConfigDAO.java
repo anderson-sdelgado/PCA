@@ -1,13 +1,7 @@
 package br.com.usinasantafe.pca.model.dao;
 
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.List;
 
-import br.com.usinasantafe.pca.model.bean.AtualAplicBean;
 import br.com.usinasantafe.pca.model.bean.variaveis.ConfigBean;
 
 public class ConfigDAO {
@@ -18,6 +12,41 @@ public class ConfigDAO {
     public boolean hasElements(){
         ConfigBean configBean = new ConfigBean();
         return configBean.hasElements();
+    }
+
+    public Long getStatusConfig(){
+        ConfigBean configBean = getConfig();
+        return configBean.getStatusAplic();
+    }
+
+    public void salvarConfig(Long nroAparelho, String senha){
+        ConfigBean configBean = new ConfigBean();
+        configBean.deleteAll();
+        configBean.setNroAparelhoConfig(nroAparelho);
+        configBean.setSenhaConfig(senha);
+        configBean.setDthrServConfig("");
+        configBean.setStatusAplic(0L);
+        configBean.insert();
+        configBean.commit();
+    }
+
+    public void setStatusAplicFechado(){
+        ConfigBean configBean = getConfig();
+        configBean.setStatusAplic(0L);
+        configBean.update();
+    }
+
+    public void setMatricUsuario(Long matricUsuario){
+        ConfigBean configBean = getConfig();
+        configBean.setMatricMotorista(matricUsuario);
+        configBean.update();
+    }
+
+    public void setIdEquip(Long idEquip){
+        ConfigBean configBean = getConfig();
+        configBean.setIdEquip(idEquip);
+        configBean.setStatusAplic(1L);
+        configBean.update();
     }
 
     public ConfigBean getConfig(){
@@ -44,16 +73,5 @@ public class ConfigDAO {
         return configBean.get("senhaConfig", senha);
     }
 
-    public void salvarConfig(Long nroAparelho, String senha){
-        ConfigBean configBean = new ConfigBean();
-        configBean.deleteAll();
-        configBean.setNroAparelhoConfig(nroAparelho);
-        configBean.setSenhaConfig(senha);
-        configBean.setFlagLogErro(0L);
-        configBean.setFlagLogEnvio(0L);
-        configBean.setDthrServConfig("");
-        configBean.insert();
-        configBean.commit();
-    }
 
 }

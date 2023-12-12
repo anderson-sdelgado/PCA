@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import br.com.usinasantafe.pca.PCAContext;
 import br.com.usinasantafe.pca.R;
+import br.com.usinasantafe.pca.model.dao.LogProcessoDAO;
 
 public class SenhaActivity extends ActivityGeneric {
 
@@ -27,14 +28,18 @@ public class SenhaActivity extends ActivityGeneric {
 
         buttonOkSenha.setOnClickListener(v -> {
 
+            LogProcessoDAO.getInstance().insertLogProcesso("buttonOkSenha.setOnClickListener(v -> {", getLocalClassName());
             if (!pcaContext.getConfigCTR().hasElements()) {
 
+                LogProcessoDAO.getInstance().insertLogProcesso("if (!pcaContext.getConfigCTR().hasElements()) {\n" +
+                        "                Intent it = new Intent(SenhaActivity.this, ConfigActivity.class);", getLocalClassName());
                 Intent it = new Intent(SenhaActivity.this, ConfigActivity.class);
                 startActivity(it);
                 finish();
 
             } else {
 
+                LogProcessoDAO.getInstance().insertLogProcesso("} else {", getLocalClassName());
                 if (pcaContext.getConfigCTR().getConfig(editTextSenha.getText().toString())) {
                     Intent it = new Intent(SenhaActivity.this, ConfigActivity.class);
                     startActivity(it);
@@ -46,6 +51,8 @@ public class SenhaActivity extends ActivityGeneric {
         });
 
         butttonCancSenha.setOnClickListener(v -> {
+            LogProcessoDAO.getInstance().insertLogProcesso("butttonCancSenha.setOnClickListener(v -> {\n" +
+                    "            Intent it = new Intent(SenhaActivity.this, MenuInicialActivity.class);", getLocalClassName());
             Intent it = new Intent(SenhaActivity.this, MenuInicialActivity.class);
             startActivity(it);
             finish();

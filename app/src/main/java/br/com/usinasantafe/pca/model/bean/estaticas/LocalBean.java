@@ -14,10 +14,6 @@ public class LocalBean extends Entidade {
     private Long idLocal;
     @DatabaseField
     private String descrLocal;
-    @DatabaseField
-    private Long flagSaidaLocal;
-    @DatabaseField
-    private Long flagDestinoLocal;
 
     public LocalBean() {
     }
@@ -38,19 +34,4 @@ public class LocalBean extends Entidade {
         this.descrLocal = descrLocal;
     }
 
-    public Long getFlagSaidaLocal() {
-        return flagSaidaLocal;
-    }
-
-    public void setFlagSaidaLocal(Long flagSaidaLocal) {
-        this.flagSaidaLocal = flagSaidaLocal;
-    }
-
-    public Long getFlagDestinoLocal() {
-        return flagDestinoLocal;
-    }
-
-    public void setFlagDestinoLocal(Long flagDestinoLocal) {
-        this.flagDestinoLocal = flagDestinoLocal;
-    }
 }
