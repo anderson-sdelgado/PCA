@@ -10,7 +10,7 @@ public class PCAContext extends Application {
 
     private Thread.UncaughtExceptionHandler mDefaultExceptionHandler;
 
-    public static String versaoWS = "2.00";
+    public static String versaoWS = "2.01";
 
     private ViagemCTR viagemCTR;
     private ConfigCTR configCTR;

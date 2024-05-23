@@ -122,9 +122,9 @@ public class ListaDetalhesViagemActivity extends ActivityGeneric {
                 }
                 case 3: {
                     LogProcessoDAO.getInstance().insertLogProcesso("case 3: {\n" +
-                            "                    pcaContext.getViagemCTR().setTipoKilometragemSelecionado(2);\n" +
+                            "                    pcaContext.getViagemCTR().setTipoKilometragemSelecionado(1);\n" +
                             "                    Intent it = new Intent(ListaDetalhesViagemActivity.this, KilometragemActivity.class);", getLocalClassName());
-                    pcaContext.getViagemCTR().setTipoSelecionado(2);
+                    pcaContext.getViagemCTR().setTipoSelecionado(1);
                     Intent it = new Intent(ListaDetalhesViagemActivity.this, KilometragemActivity.class);
                     startActivity(it);
                     finish();
@@ -132,9 +132,9 @@ public class ListaDetalhesViagemActivity extends ActivityGeneric {
                 }
                 case 4: {
                     LogProcessoDAO.getInstance().insertLogProcesso("case 4: {\n" +
-                            "                    pcaContext.getViagemCTR().setTipoKilometragemSelecionado(1);\n" +
+                            "                    pcaContext.getViagemCTR().setTipoKilometragemSelecionado(2);\n" +
                             "                    Intent it = new Intent(ListaDetalhesViagemActivity.this, KilometragemActivity.class);", getLocalClassName());
-                    pcaContext.getViagemCTR().setTipoSelecionado(1);
+                    pcaContext.getViagemCTR().setTipoSelecionado(2);
                     Intent it = new Intent(ListaDetalhesViagemActivity.this, KilometragemActivity.class);
                     startActivity(it);
                     finish();
